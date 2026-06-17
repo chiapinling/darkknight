@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forge The Machine Vol. 2 — The Dark Knight Protocol</title>
+<title>Forged Performance AI — The Protocol Engine</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -26,9 +26,9 @@
   --green-bright: #44bb77;
   --amber: #cc8833;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 body {
   background: var(--black);
   color: var(--white);
@@ -37,1658 +37,610 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+button { font-family: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
 /* ── HERO ── */
-.hero {
-  position: relative;
-  padding: 0;
-  overflow: hidden;
-  border-bottom: 1px solid var(--gold-dim);
-}
-
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--gold-dim); }
 .hero-bg {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background:
     radial-gradient(ellipse 60% 80% at 70% 50%, #0d1520 0%, transparent 70%),
     radial-gradient(ellipse 40% 60% at 20% 80%, #1a0a08 0%, transparent 60%),
     linear-gradient(180deg, #060608 0%, #0a0810 50%, #060608 100%);
 }
-
 .hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.3;
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px; opacity: 0.3;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
 }
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: end;
-  padding: 60px 48px 48px;
-}
-
+.hero-content { position: relative; z-index: 2; padding: 56px 28px 44px; max-width: 1100px; margin: 0 auto; }
 .hero-eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--gold);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold);
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
 }
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: var(--gold);
-}
-
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
 .hero-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(40px, 7vw, 88px);
-  font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -1px;
-  color: var(--white);
-  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif; font-size: clamp(36px, 7vw, 80px); font-weight: 700;
+  line-height: 0.94; letter-spacing: -1px; text-transform: uppercase;
 }
-.hero-title .vol { font-size: 0.4em; color: var(--gold); letter-spacing: 6px; font-weight: 400; display: block; margin-bottom: 8px; }
 .hero-title .accent { color: var(--gold); }
-.hero-title .sub-title { display: block; font-size: 0.38em; color: var(--white-dim); font-weight: 300; letter-spacing: 8px; margin-top: 12px; text-transform: uppercase; }
+.hero-title .sub-title { display: block; font-size: 0.36em; color: var(--white-dim); font-weight: 300; letter-spacing: 8px; margin-top: 12px; }
+.hero-tag { margin-top: 20px; max-width: 560px; color: var(--white-dim); font-size: 14px; }
+.hero-tag em { color: var(--gold); font-style: normal; }
 
-.hero-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  min-width: 280px;
+/* ── CALIBRATION ── */
+.calib { max-width: 1100px; margin: 0 auto; padding: 40px 28px 80px; }
+.calib-head { margin-bottom: 28px; }
+.calib-head h2 { font-family: 'Oswald', sans-serif; font-size: 26px; letter-spacing: 2px; text-transform: uppercase; }
+.calib-head h2 span { color: var(--gold); }
+.calib-head p { color: var(--white-dim); max-width: 620px; margin-top: 8px; }
+.calib-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.field {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px 14px;
+  transition: border-color .2s;
 }
-.hstat {
-  background: var(--panel);
-  padding: 14px 18px;
+.field:focus-within { border-color: var(--gold-dim); box-shadow: 0 0 0 3px var(--gold-glow); }
+.field label { display: block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.field input, .field select {
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-light);
+  color: var(--white); font-family: 'Oswald', sans-serif; font-size: 22px; padding: 2px 0 6px; letter-spacing: 1px;
 }
-.hstat-label { font-size: 10px; color: var(--white-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-.hstat-val { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; }
-.hstat-val.gold { color: var(--gold); }
-.hstat-val.green { color: var(--green-bright); }
-.hstat-val.red { color: var(--red-bright); }
+.field select option { background: var(--off-black); font-size: 16px; }
+.field .hint { font-size: 11px; color: var(--white-muted); margin-top: 8px; line-height: 1.45; }
+.calib-actions { margin-top: 28px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.btn-forge {
+  background: var(--gold); color: var(--black); border: none; border-radius: 4px;
+  font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; padding: 16px 38px; transition: transform .15s, box-shadow .2s;
+}
+.btn-forge:hover { transform: translateY(-1px); box-shadow: 0 6px 24px var(--gold-glow), 0 0 0 1px var(--gold); }
+.calib-note { font-size: 12px; color: var(--white-muted); max-width: 380px; }
+.calib-error { color: var(--red-bright); font-size: 13px; margin-top: 14px; display: none; }
 
-/* ── BATMAN QUOTE BANNER ── */
-.quote-banner {
-  padding: 28px 48px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(90deg, #0c0810 0%, var(--off-black) 50%, #080c10 100%);
-  display: flex;
-  align-items: center;
-  gap: 24px;
+/* ── PROGRAM ── */
+#program { display: none; max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; }
+.athlete-bar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border); border: 1px solid var(--border);
+  border-radius: 6px; overflow: hidden; margin: 36px 0 8px;
 }
-.quote-icon {
-  font-family: 'Oswald', sans-serif;
-  font-size: 72px;
-  color: var(--gold);
-  opacity: 0.2;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: -16px;
-}
-.quote-text {
-  font-style: italic;
-  font-size: 15px;
-  color: var(--white-dim);
-  line-height: 1.8;
-  max-width: 900px;
-}
-.quote-text strong { color: var(--white); font-style: normal; font-weight: 500; }
-.quote-cite { display: block; margin-top: 8px; font-style: normal; font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+.astat { background: var(--panel); padding: 14px 18px; flex: 1; min-width: 130px; }
+.astat .k { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-muted); }
+.astat .v { font-family: 'Oswald', sans-serif; font-size: 20px; color: var(--gold); margin-top: 2px; }
+.astat .v small { font-size: 12px; color: var(--white-dim); }
+.recalib { margin: 10px 0 0; background: none; border: 1px solid var(--border-light); color: var(--white-dim); border-radius: 4px; padding: 8px 16px; font-size: 12px; letter-spacing: 1px; }
+.recalib:hover { border-color: var(--gold-dim); color: var(--gold); }
+.savelink { margin-left: 10px; background: none; border: 1px solid var(--border-light); color: var(--white-dim); border-radius: 4px; padding: 8px 16px; font-size: 12px; letter-spacing: 1px; }
+.savelink:hover { border-color: var(--gold-dim); color: var(--gold); }
 
-/* ── SECTIONS ── */
-.section { padding: 40px 48px; border-bottom: 1px solid var(--border); }
-.section-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--gold);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* phases overview */
+.phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 36px 0; }
+.phase-blk { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--gold-dim); border-radius: 6px; padding: 20px; }
+.phase-blk-id { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+.phase-blk-title { font-family: 'Oswald', sans-serif; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; margin: 6px 0 8px; }
+.phase-blk p { color: var(--white-dim); font-size: 13px; }
 
-/* ── BATMAN REFERENCE ── */
-.batman-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.batman-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-}
-.batman-card.highlight { border-color: var(--gold-dim); background: #0e0d11; }
-.bc-label { font-size: 10px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; font-family: 'DM Mono', monospace; }
-.bc-title { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 500; letter-spacing: 1px; color: var(--white); margin-bottom: 8px; }
-.bc-body { font-size: 13px; color: var(--white-dim); line-height: 1.7; }
-.bc-body strong { color: var(--white); font-weight: 500; }
-
-/* ── PHASE BLOCKS ── */
-.phases-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 20px;
-}
-.phase-blk { background: var(--panel); padding: 22px; }
-.phase-blk-id { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--white-muted); text-transform: uppercase; margin-bottom: 8px; }
-.phase-blk-title { font-family: 'Oswald', sans-serif; font-size: 17px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-.phase-blk.pa .phase-blk-title { color: var(--gold); }
-.phase-blk.pb .phase-blk-title { color: #cc5533; }
-.phase-blk.pc .phase-blk-title { color: var(--blue-bright); }
-.phase-blk p { font-size: 13px; color: var(--white-dim); line-height: 1.7; }
-
-/* ── TARGETS ── */
-.targets-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 4px;
-}
-.target-blk { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }
-.target-blk h3 { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
-.t-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #111118; font-size: 13px; align-items: center; }
-.t-row:last-child { border-bottom: none; }
-.t-row .label { color: var(--white-dim); }
-.t-row .val { font-family: 'DM Mono', monospace; color: var(--gold); font-size: 12px; }
-
-/* ── WEEK NAV ── */
-.week-nav {
-  padding: 18px 48px;
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  align-items: center;
-  background: var(--off-black);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.phase-sep { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--white-muted); letter-spacing: 2px; text-transform: uppercase; margin: 0 4px; }
+/* week nav */
+.week-nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 28px; position: sticky; top: 0; background: var(--black); padding: 14px 0; z-index: 10; border-bottom: 1px solid var(--border); }
+.phase-sep { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold-dim); letter-spacing: 2px; padding: 0 4px; }
 .wbtn {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  color: var(--white-muted);
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  padding: 7px 13px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-  letter-spacing: 1px;
+  background: var(--panel); border: 1px solid var(--border-light); color: var(--white-dim);
+  border-radius: 4px; padding: 8px 14px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 1px;
 }
-.wbtn:hover { border-color: var(--gold-dim); color: var(--white); }
-.wbtn.active { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight: 600; }
-.wbtn.deload { border-color: #1a2a3a; }
-.wbtn.deload.active { background: var(--blue-bright); border-color: var(--blue-bright); color: var(--white); }
+.wbtn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.wbtn.active { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 500; }
+.wbtn.deload { border-style: dashed; }
 
-/* ── WEEK PANEL ── */
+/* week panel */
 .week-panel { display: none; }
-.week-panel.active { display: block; }
+.week-panel.active { display: block; animation: rise .35s ease; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.week-hdr { background: var(--panel); border: 1px solid var(--border); border-top: 2px solid var(--gold); border-radius: 6px; padding: 26px 28px; margin-bottom: 18px; }
+.week-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+.week-name { font-family: 'Oswald', sans-serif; font-size: clamp(24px, 4vw, 38px); letter-spacing: 1px; text-transform: uppercase; margin: 6px 0 2px; }
+.week-theme { color: var(--white-dim); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+.week-focus { margin-top: 14px; color: var(--white-dim); font-size: 13.5px; max-width: 860px; }
+.week-focus strong { color: var(--white); }
+.week-macros { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.macro-chip { background: var(--off-black); border: 1px solid var(--border-light); border-radius: 4px; padding: 6px 12px; font-size: 12px; color: var(--white-dim); }
+.macro-chip strong { color: var(--gold); font-weight: 500; }
 
-.week-hdr {
-  padding: 36px 48px 24px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--off-black) 0%, var(--black) 100%);
-}
-.week-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; }
-.week-name {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(32px, 5vw, 60px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--white);
-}
-.week-theme { margin-top: 6px; font-size: 12px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
-.week-focus { margin-top: 12px; font-size: 14px; color: var(--white-dim); max-width: 780px; line-height: 1.8; font-style: italic; }
-.week-focus strong { color: var(--white); font-style: normal; }
-.week-macros {
-  display: flex;
-  gap: 12px;
-  margin-top: 18px;
-  flex-wrap: wrap;
-}
-.macro-chip {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 7px 14px;
-  font-size: 12px;
-}
-.macro-chip strong { color: var(--white); font-weight: 500; }
-.macro-chip span { color: var(--white-muted); }
-
-/* ── DAYS ── */
-.days-wrap { padding: 24px 48px; display: flex; flex-direction: column; gap: 14px; }
-
-.day-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-}
+.days-wrap { display: grid; gap: 14px; }
+.day-card { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
 .day-card.gold-border { border-color: var(--gold-dim); }
-.day-card.rest-card { opacity: 0.7; }
-
-.day-hdr {
-  padding: 13px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  border-bottom: 1px solid var(--border);
-  background: #0d0d12;
-}
-.day-name-wrap { min-width: 160px; }
-.day-name {
-  font-family: 'Oswald', sans-serif;
-  font-size: 19px;
-  font-weight: 500;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  line-height: 1;
-}
-.day-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--white-muted); margin-top: 3px; letter-spacing: 1px; }
-.day-name.rest { color: var(--white-muted); }
-.day-name.active { color: var(--white); }
+.day-hdr { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 20px; background: var(--off-black); border-bottom: 1px solid var(--border); }
+.day-name { font-family: 'Oswald', sans-serif; font-size: 17px; letter-spacing: 2px; }
 .day-name.gold { color: var(--gold); }
+.day-name.rest { color: var(--white-muted); }
+.day-name.active { color: var(--green-bright); }
+.day-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--white-muted); margin-top: 1px; }
+.day-badge { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; border: 1px solid var(--border-light); color: var(--white-dim); }
+.badge-upper { border-color: var(--gold-dim); color: var(--gold); }
+.badge-lower { border-color: #5a3a8a; color: #a884e0; }
+.badge-combat { border-color: var(--red); color: #e07070; }
+.badge-rest { color: var(--white-muted); }
+.badge-recovery { border-color: var(--green); color: var(--green-bright); }
+.badge-final { background: var(--gold); color: var(--black); border: none; }
+.day-body { padding: 18px 20px 20px; }
+.day-desc { font-style: italic; color: var(--white-dim); font-size: 13px; margin-bottom: 14px; }
 
-.day-badge {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 3px;
-  font-weight: 500;
-  font-family: 'DM Mono', monospace;
-}
-.badge-lower { background: #1a0808; color: #cc4444; border: 1px solid #440000; }
-.badge-upper { background: #080d1a; color: #4488cc; border: 1px solid #001a44; }
-.badge-circuit { background: #0a1208; color: #44bb55; border: 1px solid #0a3010; }
-.badge-combat { background: #150a00; color: #cc8833; border: 1px solid #442200; }
-.badge-recovery { background: #0a0e0a; color: #668866; border: 1px solid #1a2a1a; }
-.badge-rest { background: #111; color: #444; border: 1px solid #222; }
-.badge-power { background: #120812; color: #aa44cc; border: 1px solid #330033; }
-.badge-complete { background: #0a1a0f; color: #44cc77; border: 1px solid #0a3020; }
-
-.day-body { padding: 16px 20px; }
-.day-desc { font-size: 13px; color: var(--white-dim); margin-bottom: 14px; line-height: 1.7; font-style: italic; }
-
-/* ── EXERCISE TABLE ── */
-.ex-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 0; }
-.ex-table th {
-  text-align: left;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--white-muted);
-  padding: 6px 10px;
-  border-bottom: 1px solid var(--border);
-  font-weight: 400;
-  font-family: 'DM Mono', monospace;
-}
-.ex-table td { padding: 9px 10px; border-bottom: 1px solid #0e0e14; vertical-align: top; }
+.ex-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ex-table th { text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-muted); padding: 6px 10px; border-bottom: 1px solid var(--border-light); }
+.ex-table td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
 .ex-table tr:last-child td { border-bottom: none; }
 .ex-name { color: var(--white); font-weight: 500; }
-.ex-note { color: var(--white-muted); font-size: 11px; margin-top: 2px; font-style: italic; }
-.ex-sets { font-family: 'DM Mono', monospace; color: var(--gold); font-size: 12px; white-space: nowrap; }
-.ex-load { font-family: 'DM Mono', monospace; color: var(--white-dim); font-size: 12px; white-space: nowrap; }
-.ex-rest { color: var(--white-muted); font-size: 11px; white-space: nowrap; }
-.ss { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: var(--gold); border-radius: 3px; font-size: 9px; color: var(--black); font-weight: 700; margin-right: 4px; flex-shrink: 0; }
-.ss.blue { background: var(--blue-bright); }
-.ss.red { background: var(--red-bright); }
+.ex-note { font-size: 11.5px; color: var(--white-muted); margin-top: 2px; }
+.ex-sets { font-family: 'DM Mono', monospace; color: var(--white-dim); white-space: nowrap; }
+.ex-load { font-family: 'DM Mono', monospace; color: var(--gold); white-space: nowrap; }
+.ex-rest { font-family: 'DM Mono', monospace; color: var(--white-muted); white-space: nowrap; }
 
-/* ── CIRCUIT BLOCK ── */
-.circuit-block {
-  background: #080c08;
-  border: 1px solid #1a2a1a;
-  border-radius: 8px;
-  padding: 16px 18px;
-  margin-top: 12px;
-}
-.circuit-block.gold { background: #0c0a04; border-color: #2a2208; }
-.circuit-block.blue { background: #060810; border-color: #0a1428; }
-.circuit-block.red { background: #0c0404; border-color: #2a0808; }
-.circuit-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.circuit-block.green-border .circuit-title { color: var(--green-bright); }
+.circuit-block { border: 1px solid var(--border-light); border-radius: 6px; padding: 14px 16px; margin-top: 12px; background: var(--off-black); }
+.circuit-block.red { border-color: var(--red); background: #0c0606; }
+.circuit-block.gold { border-color: var(--gold-dim); background: #0c0a06; }
+.circuit-block.blue { border-color: var(--blue-steel); background: #060a0e; }
+.circuit-block.green-border { border-color: var(--green); background: #060c08; }
+.circuit-title { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-dim); margin-bottom: 8px; }
+.circuit-block.red .circuit-title { color: #e07070; }
 .circuit-block.gold .circuit-title { color: var(--gold); }
 .circuit-block.blue .circuit-title { color: var(--blue-bright); }
-.circuit-block.red .circuit-title { color: var(--red-bright); }
-.circuit-item { font-size: 13px; color: var(--white-dim); padding: 4px 0; display: flex; gap: 8px; line-height: 1.5; }
-.circuit-item::before { content: '▸'; flex-shrink: 0; color: var(--gold); }
-.circuit-block.blue .circuit-item::before { color: var(--blue-bright); }
-.circuit-block.red .circuit-item::before { color: var(--red-bright); }
-.circuit-block.green-border { background: #060c06; border-color: #0a1e0a; }
-.circuit-block.green-border .circuit-item::before { color: var(--green-bright); }
+.circuit-block.green-border .circuit-title { color: var(--green-bright); }
+.circuit-item { font-size: 13px; color: var(--white-dim); padding: 3px 0; }
+.circuit-item strong { color: var(--white); }
+.creed { color: var(--gold) !important; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
 
-/* ── REST CARDS ── */
-.rest-grid-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.rest-item { background: var(--off-black); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; }
-.rest-item h4 { font-size: 10px; color: var(--white-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; font-family: 'DM Mono', monospace; }
-.rest-item p { font-size: 13px; color: var(--white-dim); line-height: 1.6; }
+.rest-grid-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.rest-item h4 { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.rest-item p { font-size: 13px; color: var(--white-dim); }
 
-/* ── NUTRITION SECTION ── */
-.nutr-section {
-  margin: 0 48px 24px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 22px;
+.coach-final { background: var(--panel); border: 1px solid var(--gold-dim); border-radius: 6px; padding: 30px; margin-top: 40px; }
+.coach-final h2 { font-family: 'Oswald', sans-serif; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.coach-final p { color: var(--white-dim); font-size: 13.5px; margin-bottom: 12px; max-width: 900px; }
+.coach-final strong { color: var(--white); }
+
+footer { text-align: center; padding: 30px; color: var(--white-muted); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-top: 1px solid var(--border); }
+
+@media (max-width: 640px) {
+  .hero-content { padding: 40px 18px 32px; }
+  .calib, #program { padding-left: 18px; padding-right: 18px; }
+  .day-hdr { padding: 12px 14px; }
+  .day-body { padding: 14px; }
+  .ex-table th:nth-child(4), .ex-table td:nth-child(4) { display: none; }
 }
-.nutr-title { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.nutr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 14px; }
-.nutr-cell { background: var(--off-black); border-radius: 6px; padding: 10px 14px; }
-.nutr-label { font-size: 10px; color: var(--white-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
-.nutr-val { font-family: 'DM Mono', monospace; font-size: 17px; color: var(--white); }
-.nutr-sub { font-size: 11px; color: var(--white-muted); margin-top: 2px; }
-.nutr-notes { font-size: 13px; color: var(--white-dim); line-height: 1.8; }
-.nutr-notes strong { color: var(--white); font-weight: 500; }
-
-/* ── COACH FINAL ── */
-.coach-final { padding: 40px 48px; background: var(--off-black); border-top: 1px solid var(--gold-dim); }
-.coach-final h2 { font-family: 'Oswald', sans-serif; font-size: 28px; letter-spacing: 3px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
-.coach-final p { font-size: 14px; color: var(--white-dim); line-height: 1.9; max-width: 820px; margin-bottom: 14px; }
-.coach-final p strong { color: var(--white); font-weight: 500; }
-
-/* ── KICKOFF DAY ── */
-.kickoff-banner {
-  margin: 24px 48px;
-  background: linear-gradient(135deg, #0c0a04 0%, #0a0c10 100%);
-  border: 1px solid var(--gold-dim);
-  border-radius: 10px;
-  padding: 24px;
-}
-.kickoff-banner h3 { font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.kickoff-banner p { font-size: 13px; color: var(--white-dim); line-height: 1.7; margin-bottom: 8px; }
-.kickoff-banner p strong { color: var(--white); font-weight: 500; }
-.kickoff-list { list-style: none; margin-top: 10px; }
-.kickoff-list li { padding: 6px 0; font-size: 13px; color: var(--white-dim); display: flex; gap: 10px; border-bottom: 1px solid var(--border); }
-.kickoff-list li:last-child { border-bottom: none; }
-.kickoff-list li::before { content: '◆'; color: var(--gold); flex-shrink: 0; font-size: 9px; margin-top: 4px; }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════ HERO -->
+<!-- ══════════ HERO ══════════ -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div>
-      <div class="hero-eyebrow">Forge The Machine · Phase 2 · 12 Weeks</div>
-      <h1 class="hero-title">
-        <span class="vol">Volume II</span>
-        THE DARK<br><span class="accent">KNIGHT</span>
-        <span class="sub-title">Protocol · Aug – Oct 2026</span>
-      </h1>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-label">Phase 1 End</div><div class="hstat-val gold">~72 kg</div></div>
-      <div class="hstat"><div class="hstat-label">Body Fat</div><div class="hstat-val green">~12%</div></div>
-      <div class="hstat"><div class="hstat-label">Target BF</div><div class="hstat-val">≤12%</div></div>
-      <div class="hstat"><div class="hstat-label">Target Muscle</div><div class="hstat-val gold">+3–4 kg</div></div>
-      <div class="hstat"><div class="hstat-label">Squat 1RM</div><div class="hstat-val">120 kg</div></div>
-      <div class="hstat"><div class="hstat-label">Deadlift 1RM</div><div class="hstat-val">140 kg</div></div>
-      <div class="hstat"><div class="hstat-label">Bench 1RM</div><div class="hstat-val">100 kg</div></div>
-      <div class="hstat"><div class="hstat-label">Reference</div><div class="hstat-val gold" style="font-size:13px;">Batman TDK</div></div>
-    </div>
+    <div class="hero-eyebrow">Forged Performance AI · Protocol Engine v1.0</div>
+    <h1 class="hero-title">The <span class="accent">Protocol</span><span class="sub-title">12 Weeks · Calibrated To You</span></h1>
+    <p class="hero-tag">Built on the training philosophy that prepared a Hollywood physique for the screen — <em>functional strength, explosive power, relentless conditioning</em> — and recalculated entirely around your numbers. Enter your baselines. The engine forges your 12 weeks.</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════ QUOTE -->
-<div class="quote-banner">
-  <div class="quote-icon">"</div>
-  <div class="quote-text">
-    "The goal was never to look like a bodybuilder. The goal was to look like something <strong>genuinely dangerous</strong> — an athlete, a fighter, a man who could actually do what Bruce Wayne does. That means functional strength, explosive power, and the kind of conditioning that makes every movement look effortless."
-    <span class="quote-cite">— Logan Hood, Christian Bale's trainer for The Dark Knight (2008), on the Batman physique philosophy</span>
+<!-- ══════════ CALIBRATION ══════════ -->
+<div class="calib" id="calib">
+  <div class="calib-head">
+    <h2>Calibration <span>— Enter Your Baselines</span></h2>
+    <p>Test these before you begin (estimated 1RMs are fine — use a recent heavy set and an online estimate). Every load in all 12 weeks is computed from what you enter here. Honest numbers in, honest results out.</p>
   </div>
+  <div class="calib-grid">
+    <div class="field"><label for="f-alias">Alias / Name</label><input id="f-alias" type="text" placeholder="The operator" maxlength="24"></div>
+    <div class="field"><label for="f-units">Units</label><select id="f-units"><option value="kg">Kilograms</option><option value="lb">Pounds</option></select></div>
+    <div class="field"><label for="f-bw">Bodyweight</label><input id="f-bw" type="number" min="40" max="200" placeholder="72"><div class="hint">Morning, fasted.</div></div>
+    <div class="field"><label for="f-squat">Back Squat 1RM</label><input id="f-squat" type="number" min="20" placeholder="120"></div>
+    <div class="field"><label for="f-dead">Deadlift 1RM</label><input id="f-dead" type="number" min="20" placeholder="140"></div>
+    <div class="field"><label for="f-bench">Bench Press 1RM</label><input id="f-bench" type="number" min="20" placeholder="110"></div>
+    <div class="field"><label for="f-ohp">Overhead Press 1RM</label><input id="f-ohp" type="number" min="10" placeholder="70"><div class="hint">Strict press. Push press is computed at ~115%.</div></div>
+    <div class="field"><label for="f-pull">Weighted Pull-Up — 5-rep added load</label><input id="f-pull" type="number" min="0" placeholder="15"><div class="hint">Extra load for 5 strict reps. Enter 0 if bodyweight only — the engine switches to rep progression.</div></div>
+    <div class="field"><label for="f-start">Start Date (Monday)</label><input id="f-start" type="date"><div class="hint">Snaps to the next Monday automatically.</div></div>
+  </div>
+  <div class="calib-actions">
+    <button class="btn-forge" onclick="forge()">Forge My Protocol</button>
+    <div class="calib-note">Your numbers are encoded into the page link — bookmark it after generating and your personalized program is always one tap away. Nothing is uploaded anywhere.</div>
+  </div>
+  <div class="calib-error" id="calib-error">Complete bodyweight and all four lifts to generate the protocol.</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════ BATMAN REFERENCE -->
-<div class="section">
-  <div class="section-label">The Dark Knight Blueprint · Training Philosophy</div>
-  <div class="batman-grid">
-    <div class="batman-card highlight">
-      <div class="bc-label">Source: Logan Hood Protocol</div>
-      <div class="bc-title">Functional Fighter's Body</div>
-      <div class="bc-body">Logan Hood trained Bale using <strong>functional compound movements, gymnastic strength work, and combat conditioning</strong>. No machine isolation — every exercise had to translate to real-world athletic performance. The physique was built by moving like an athlete, not posing like one.</div>
-    </div>
-    <div class="batman-card highlight">
-      <div class="bc-label">Source: Mark Twight / Gym Jones Methodology</div>
-      <div class="bc-title">Mental Hardness = Physical Results</div>
-      <div class="bc-body">Twight's philosophy underpins the entire block: <strong>the mind fails before the body.</strong> Density training, timed circuits, and deliberately uncomfortable rest intervals force adaptation not just physically but psychologically. You become the character by training like it.</div>
-    </div>
-    <div class="batman-card highlight">
-      <div class="bc-label">Source: G. Joujon-Roche / Hollywood Physique</div>
-      <div class="bc-title">The V-Taper Cape Effect</div>
-      <div class="bc-body">Joujon-Roche's methodology targeted the <strong>wide-back, capped-shoulder, narrow-waist</strong> silhouette — what the bat suit amplifies. High volume weighted pull-ups, overhead pressing, and cable work build the visual architecture that makes the costume look earned, not padded.</div>
-    </div>
-    <div class="batman-card">
-      <div class="bc-label">Training Split Rationale</div>
-      <div class="bc-title">Push / Pull / Legs → Athletic Circuits</div>
-      <div class="bc-body">Phase 2A uses <strong>hypertrophy-focused PPL</strong> to build the structural mass. Phase 2B transitions to <strong>power and explosiveness</strong> — Olympic variations, plyometrics. Phase 2C introduces <strong>Batman Combat Circuits</strong> — full-body density blocks that build the athletic leanness of a real Dark Knight.</div>
-    </div>
-    <div class="batman-card">
-      <div class="bc-label">Nutrition Shift: Controlled Lean Bulk</div>
-      <div class="bc-title">Build Without Blurring</div>
-      <div class="bc-body">Phase 1 was a deficit. Phase 2 is a <strong>+200–300 kcal surplus on training days</strong>, maintenance on rest days. The goal: build muscle without allowing body fat to climb above 14%. Protein stays at 2.2g/kg. Carb timing around training becomes critical.</div>
-    </div>
-    <div class="batman-card">
-      <div class="bc-label">The Dark Knight Standard</div>
-      <div class="bc-title">What You're Building Toward</div>
-      <div class="bc-body">Bale's Dark Knight physique: <strong>~78–80 kg, ~8–10% body fat</strong>, dominant upper back and shoulders, visible abs at rest, explosive pulling strength. Not the biggest man in the room — the most capable. At program end: that is what you will be.</div>
-    </div>
+<!-- ══════════ PROGRAM ══════════ -->
+<div id="program">
+  <div class="athlete-bar" id="athlete-bar"></div>
+  <div>
+    <button class="recalib" onclick="recalibrate()">↺ Recalibrate</button>
+    <button class="savelink" onclick="copyLink(this)">⧉ Copy my personal link</button>
   </div>
-</div>
 
-<!-- ══════════════════════════════════════════════════ TARGETS -->
-<div class="section">
-  <div class="section-label">Phase 2 Transformation Targets</div>
-  <div class="targets-grid">
-    <div class="target-blk">
-      <h3>Body Composition Goals</h3>
-      <div class="t-row"><span class="label">Starting Weight (1 Aug)</span><span class="val">~72 kg</span></div>
-      <div class="t-row"><span class="label">Target Weight (25 Oct)</span><span class="val">76–78 kg</span></div>
-      <div class="t-row"><span class="label">Body Fat — maintain</span><span class="val">≤12–13%</span></div>
-      <div class="t-row"><span class="label">Muscle Mass Added</span><span class="val">+3–4 kg</span></div>
-      <div class="t-row"><span class="label">Shoulders / Back Priority</span><span class="val">V-Taper Dominant</span></div>
-      <div class="t-row"><span class="label">Dark Knight Reference</span><span class="val">~78 kg / 9% BF</span></div>
+  <div class="phase-grid">
+    <div class="phase-blk">
+      <div class="phase-blk-id" id="ph-a-dates">Phase A · Weeks 1–4</div>
+      <div class="phase-blk-title">Build the Frame</div>
+      <p>Push / Pull / Legs hypertrophy. High volume, controlled rest, calorie surplus on training days. The architectural mass of the V-taper goes up here. Week 4 deloads.</p>
     </div>
-    <div class="target-blk">
-      <h3>Strength &amp; Performance Goals</h3>
-      <div class="t-row"><span class="label">Back Squat</span><span class="val">120 → 130 kg</span></div>
-      <div class="t-row"><span class="label">Deadlift</span><span class="val">140 → 152.5 kg</span></div>
-      <div class="t-row"><span class="label">Bench Press</span><span class="val">100 → 110 kg</span></div>
-      <div class="t-row"><span class="label">Weighted Pull-Up</span><span class="val">BW+10 → BW+20 kg</span></div>
-      <div class="t-row"><span class="label">Ring Dips</span><span class="val">3 × 10 bodyweight</span></div>
-      <div class="t-row"><span class="label">Conditioning</span><span class="val">Batman Circuit sub 20 min</span></div>
+    <div class="phase-blk">
+      <div class="phase-blk-id" id="ph-b-dates">Phase B · Weeks 5–8</div>
+      <div class="phase-blk-title">Load the Spring</div>
+      <p>Explosive power. Hang cleans, plyometrics, heavier low-rep clusters. The physique stops looking built and starts looking athletic. Week 8 deloads.</p>
     </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════ PHASE OVERVIEW -->
-<div class="section">
-  <div class="section-label">12-Week Program Architecture</div>
-  <div class="phases-row">
-    <div class="phase-blk pa">
-      <div class="phase-blk-id">Weeks 1–4 · 1 Aug – 30 Aug</div>
-      <div class="phase-blk-title">Phase 2A: The Foundation</div>
-      <p>Hypertrophy-focused Push/Pull/Legs split. High volume, controlled tempo, progressive overload on compounds. Build the structural muscle mass that the Batman physique requires. Slight caloric surplus. This is construction — the scaffold that everything else hangs on.</p>
-    </div>
-    <div class="phase-blk pb">
-      <div class="phase-blk-id">Weeks 5–8 · 31 Aug – 27 Sep</div>
-      <div class="phase-blk-title">Phase 2B: The Power Block</div>
-      <p>Explosive power development. Olympic lift variations (hang cleans, power snatches), plyometrics, and combat conditioning introduced. Strength work transitions to heavier, lower-rep clusters. This is where the physique stops looking built and starts looking <em>dangerous</em>.</p>
-    </div>
-    <div class="phase-blk pc">
-      <div class="phase-blk-id">Weeks 9–12 · 28 Sep – 25 Oct</div>
-      <div class="phase-blk-title">Phase 2C: The Batman Circuit</div>
-      <p>Logan Hood-style full-body density circuits. Timed blocks, minimal rest, maximum output. Strength maintained. Conditioning peaks. The final 4 weeks reveal everything built in Phases 2A and 2B — a lean, powerful, athletic physique that earns the Dark Knight standard.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════ KICKOFF DAY -->
-<div class="kickoff-banner">
-  <h3>⚡ Kickoff Day — Saturday 1 Aug 2026</h3>
-  <p>The program officially launches Saturday 1 August. This is not a training day — it is your <strong>assessment and orientation session</strong>. Complete the following before Week 1 begins on Monday 3 August.</p>
-  <ul class="kickoff-list">
-    <li>Morning weigh-in (fasted). Record weight, take progress photos (front/side/back). Re-scan BIA if possible.</li>
-    <li>Test 1RM or estimated 1RM for Squat, Bench, Deadlift, and max bodyweight pull-ups. Log all numbers.</li>
-    <li>Time yourself on 10 pull-ups + 20 push-ups + 20 air squats + 400m run. This is your baseline conditioning score.</li>
-    <li>Set up nutrition tracking. Calculate TDEE at new bodyweight (~72 kg). Training day surplus target: +250 kcal.</li>
-    <li>Read the entire 12-week program. Know Phase 2A before Monday. Prepare your mind. The Dark Knight does not improvise.</li>
-  </ul>
-</div>
-
-<!-- ══════════════════════════════════════════════════ WEEK NAV -->
-<div class="week-nav">
-  <span class="phase-sep">2A</span>
-  <button class="wbtn active" onclick="showWeek(1)">W01</button>
-  <button class="wbtn" onclick="showWeek(2)">W02</button>
-  <button class="wbtn" onclick="showWeek(3)">W03</button>
-  <button class="wbtn deload" onclick="showWeek(4)">W04</button>
-  <span class="phase-sep">2B</span>
-  <button class="wbtn" onclick="showWeek(5)">W05</button>
-  <button class="wbtn" onclick="showWeek(6)">W06</button>
-  <button class="wbtn" onclick="showWeek(7)">W07</button>
-  <button class="wbtn deload" onclick="showWeek(8)">W08</button>
-  <span class="phase-sep">2C</span>
-  <button class="wbtn" onclick="showWeek(9)">W09</button>
-  <button class="wbtn" onclick="showWeek(10)">W10</button>
-  <button class="wbtn" onclick="showWeek(11)">W11</button>
-  <button class="wbtn" onclick="showWeek(12)">W12</button>
-</div>
-
-<!-- ════════════════════════════ WEEK 1 -->
-<div class="week-panel active" id="week-1">
-  <div class="week-hdr">
-    <div class="week-num">Week 01 · Phase 2A · 3 Aug – 9 Aug 2026</div>
-    <div class="week-name">IGNITION — <span style="color:var(--gold)">BUILD BEGINS</span></div>
-    <div class="week-theme">Push / Pull / Legs · Hypertrophy Foundation</div>
-    <div class="week-focus">Phase 1 stripped the fat. Now we build the Batman. This week establishes the PPL hypertrophy template. <strong>Volume is higher than anything in Phase 1. Rest periods are controlled — 90 sec on isolation, 3 min on compounds.</strong> Eat above maintenance on training days. Every rep is structural investment.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,450 kcal (+250 surplus)</span></div>
-      <div class="macro-chip"><strong>Rest Days:</strong> <span>~2,100 kcal (maintenance)</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>190–200g daily</span></div>
-      <div class="macro-chip"><strong>Carbs:</strong> <span>220g training / 160g rest</span></div>
-      <div class="macro-chip"><strong>Fat:</strong> <span>70g daily</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-
-    <!-- MON -->
-    <div class="day-card">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">3 Aug 2026</div></div>
-        <div class="day-badge badge-recovery">Active Recovery</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc">Low-impact recovery. Zone 2 only. This is the transition day from Phase 1 — let the body understand the new stimulus is coming.</div>
-        <div class="circuit-block green-border">
-          <div class="circuit-title">Morning Movement Protocol</div>
-          <div class="circuit-item">40-min Zone 2 walk or easy jog (120–135 bpm) — fasted preferred</div>
-          <div class="circuit-item">20-min mobility: thoracic rotation, hip flexor stretching, shoulder CARs, ankle dorsiflexion</div>
-          <div class="circuit-item">Foam roll: thoracic spine, lats, quads, IT band — 30 sec each</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TUE -->
-    <div class="day-card gold-border">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">4 Aug 2026</div></div>
-        <div class="day-badge badge-upper">Push Day — Chest / Shoulders / Triceps</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc">The Batman physique lives in the chest and shoulders. This push session prioritises <strong>upper chest, boulder shoulders, and triceps mass</strong> — the visual architecture that makes the bat suit look earned. 4-sec eccentric on all pressing movements.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div><div class="ex-note">3 warm-ups | 4-sec eccentric | packed scapula</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">75 kg (75%)</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Incline DB Press</div><div class="ex-note">30° incline — upper chest focus</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">24 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Seated DB Overhead Press</div><div class="ex-note">Full ROM — touch ears at bottom</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">20 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Cable Lateral Raise</div><div class="ex-note">Superset A — cables keep tension at top</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">8 kg/side</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Face Pull</div><div class="ex-note">Superset A — shoulder health non-negotiable</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">20 kg</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Weighted Ring Dip</div><div class="ex-note">Lean forward for chest emphasis — rings are unstable, demanding</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW+5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Triceps Rope Pushdown</div><div class="ex-note">Superset B</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">25 kg</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Overhead Triceps Extension</div><div class="ex-note">Superset B — long head stretch</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">15 kg</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-        <div class="circuit-block gold">
-          <div class="circuit-title">Finisher — Shoulder Density Block</div>
-          <div class="circuit-item">3 rounds: 10 DB lateral raise + 10 front raise + 10 rear delt fly — no rest between exercises, 60 sec between rounds</div>
-          <div class="circuit-item">Use 8–10 kg. The pump is the point. This builds the caps that make the silhouette.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WED -->
-    <div class="day-card gold-border">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">5 Aug 2026</div></div>
-        <div class="day-badge badge-upper">Pull Day — Back / Biceps / Rear Delts</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc">The back is the Batman physique. Wide lats, thick traps, capped rear delts — this is what the cape hangs from. <strong>Pull-ups anchor every back session in this program.</strong> Every rep on every pull movement: initiate with the lat, not the arm.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Wide-Grip Pull-Up</div><div class="ex-note">Dead hang start — full ROM — chest to bar</div></td><td class="ex-sets">5 × 5</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Pendlay Row</div><div class="ex-note">Bar to belly — controlled eccentric — no hip drive</div></td><td class="ex-sets">4 × 6</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Seated Cable Row (wide grip)</div><div class="ex-note">Elbows flared — target upper back / rhomboids</div></td><td class="ex-sets">3 × 12</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Single-Arm DB Row</div><div class="ex-note">Superset A — heavy, row to hip</div></td><td class="ex-sets">3 × 12/side</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Chest-Supported DB Rear Delt Fly</div><div class="ex-note">Superset A — pinch scapula</div></td><td class="ex-sets">3 × 15</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Lat Pulldown</div><div class="ex-note">Best lat isolation — keep arms straight throughout</div></td><td class="ex-sets">3 × 15</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Incline DB Curl</div><div class="ex-note">Superset B — full stretch on bicep</div></td><td class="ex-sets">3 × 12</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Hammer Curl</div><div class="ex-note">Superset B — brachialis + forearm</div></td><td class="ex-sets">3 × 12</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <!-- THU -->
-    <div class="day-card gold-border">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">6 Aug 2026</div></div>
-        <div class="day-badge badge-lower">Legs Day — Squat / Posterior Chain</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc">Batman doesn't skip legs. A powerful lower body is the engine room — it drives every athletic movement, supports the spine under heavy loads, and contributes to the lean, symmetrical physique. <strong>Squat is king. Deadlift is law.</strong></div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Back Squat</div><div class="ex-note">3 warm-ups | 4-sec eccentric | 15° toe flare | knees out</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">90 kg (75%)</td><td class="ex-rest">3–4 min</td></tr>
-          <tr><td><div class="ex-name">Romanian Deadlift</div><div class="ex-note">Hip hinge — feel hamstrings load at bottom</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">90 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Bulgarian Split Squat</div><div class="ex-note">Rear foot elevated 12" — pause at bottom</div></td><td class="ex-sets">3 × 10/leg</td><td class="ex-load">16 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Leg Curl (lying)</div><div class="ex-note">Superset A — 3-sec eccentric</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Leg Extension</div><div class="ex-note">Superset A — full contraction at top</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Barbell Hip Thrust</div><div class="ex-note">Drive hips high — squeeze glutes at top for 1 sec</div></td><td class="ex-sets">4 × 12</td><td class="ex-load">80 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Standing Calf Raise</div><div class="ex-note">Full ROM — pause at stretch</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">Heavy</td><td class="ex-rest">60 sec</td></tr>
-          <tr><td><div class="ex-name">Ab Rollout + Dragon Flag</div><div class="ex-note">5 rollouts + 5 dragon flags = 1 set</div></td><td class="ex-sets">4 sets</td><td class="ex-load">BW</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-        <div class="circuit-block gold">
-          <div class="circuit-title">Post-Workout: 20-min Zone 2</div>
-          <div class="circuit-item">20-min incline walk (10% incline, 5.5 km/h) post-session — keep body fat in check during lean bulk</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FRI -->
-    <div class="day-card rest-card">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">7 Aug 2026</div></div>
-        <div class="day-badge badge-rest">Full Rest</div>
-      </div>
-      <div class="day-body">
-        <div class="rest-grid-inner">
-          <div class="rest-item"><h4>Sleep</h4><p>9 hours. Growth hormone peaks in deep sleep. This is where the muscle from Tue–Thu is actually built. Non-negotiable.</p></div>
-          <div class="rest-item"><h4>Nutrition</h4><p>Maintenance calories today. No surplus — you didn't train. Keep protein at 190–200g. Cut carbs to 150–160g.</p></div>
-          <div class="rest-item"><h4>Recovery Tools</h4><p>Foam roll if sore. Cold shower (3 min cold). Magnesium glycinate 400mg before sleep. Omega-3 3g with dinner.</p></div>
-          <div class="rest-item"><h4>Mental Prep</h4><p>Saturday is a full upper session. Review the program. Prepare your lifts. The Dark Knight plans his operations.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SAT -->
-    <div class="day-card gold-border">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">8 Aug 2026</div></div>
-        <div class="day-badge badge-upper">Upper Body — Strength Focus + Combat Conditioning</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc">Saturday's upper session goes heavier on the big compounds, then finishes with a <strong>Logan Hood-style conditioning circuit</strong> — the first taste of the Batman conditioning methodology that becomes the cornerstone of Phase 2C.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div><div class="ex-note">Chest to bar — dead hang — full lockout</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+12.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Overhead Press</div><div class="ex-note">Standing — brace core like you're bracing for a punch</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">60 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Bent-Over Row</div><div class="ex-note">45° torso — bar to sternum — squeeze lats</div></td><td class="ex-sets">4 × 8</td><td class="ex-load">80 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Dips (bodyweight)</div><div class="ex-note">Full depth — elbows 45° — lean for chest or upright for triceps</div></td><td class="ex-sets">3 × max</td><td class="ex-load">BW</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Cable Crossover (low to high)</div><div class="ex-note">Superset A — upper chest targeting</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">10 kg/side</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Straight-Arm Pulldown</div><div class="ex-note">Superset A — lat squeeze at bottom</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-        <div class="circuit-block red">
-          <div class="circuit-title">Batman Conditioning Circuit — Week 1 Introduction</div>
-          <div class="circuit-item">3 rounds for time: 10 pull-ups + 15 push-ups + 20 air squats + 10 dips — rest 90 sec between rounds</div>
-          <div class="circuit-item">Log your time. This circuit evolves every week. By Week 12, you'll be laughing at this version.</div>
-          <div class="circuit-item">Cool-down: 5-min walk + 10-min full body stretch</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUN -->
-    <div class="day-card">
-      <div class="day-hdr">
-        <div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">9 Aug 2026</div></div>
-        <div class="day-badge badge-recovery">Active Recovery + Zone 2</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc">Long aerobic session. Zone 2 fat-burning cardio to maintain the leanness built in Phase 1 while in the lean bulk. Fasted is ideal.</div>
-        <div class="circuit-block green-border">
-          <div class="circuit-title">Sunday Protocol</div>
-          <div class="circuit-item">60-min Zone 2 outdoor: walk/jog/cycle at 120–140 bpm</div>
-          <div class="circuit-item">15-min mobility sequence: Pigeon pose, couch stretch, thoracic rotation, lat stretch, hip 90-90</div>
-          <div class="circuit-item">Meal prep Sunday: cook 5 days of chicken/rice/veg. Discipline in the kitchen is discipline in the gym.</div>
-        </div>
-      </div>
+    <div class="phase-blk">
+      <div class="phase-blk-id" id="ph-c-dates">Phase C · Weeks 9–12</div>
+      <div class="phase-blk-title">The Signature Circuit</div>
+      <p>Full-body density blocks in the style used to prepare a leading man for the screen — timed, minimal rest, maximum output. Strength holds. Conditioning peaks. Everything is revealed.</p>
     </div>
   </div>
 
-  <div class="nutr-section">
-    <div class="nutr-title">Week 1 Nutrition — The Lean Bulk Begins</div>
-    <div class="nutr-grid">
-      <div class="nutr-cell"><div class="nutr-label">Training Day kcal</div><div class="nutr-val">2,450</div><div class="nutr-sub">+250 surplus</div></div>
-      <div class="nutr-cell"><div class="nutr-label">Rest Day kcal</div><div class="nutr-val">2,100</div><div class="nutr-sub">maintenance</div></div>
-      <div class="nutr-cell"><div class="nutr-label">Protein</div><div class="nutr-val">200g</div><div class="nutr-sub">2.8g/kg at 72kg</div></div>
-      <div class="nutr-cell"><div class="nutr-label">Carbs (training)</div><div class="nutr-val">220g</div><div class="nutr-sub">prioritise pre/post workout</div></div>
-      <div class="nutr-cell"><div class="nutr-label">Fat</div><div class="nutr-val">70g</div><div class="nutr-sub">olive oil, avocado, nuts</div></div>
-      <div class="nutr-cell"><div class="nutr-label">Creatine</div><div class="nutr-val">5g</div><div class="nutr-sub">daily — critical now</div></div>
-    </div>
-    <div class="nutr-notes">
-      <strong>Pre-workout (60 min before):</strong> 50g carbs + 30g protein. Example: oats + whey or rice cake + Greek yoghurt.<br>
-      <strong>Post-workout (within 45 min):</strong> 60g carbs + 40g protein. Example: white rice + chicken breast + banana.<br>
-      <strong>Lean bulk rule:</strong> If body fat creeps above 14% — cut training day surplus to +150 kcal. The Dark Knight stays sharp.
-    </div>
+  <div class="week-nav" id="week-nav"></div>
+  <div id="weeks-container"></div>
+
+  <div class="coach-final">
+    <h2>Coach's Notes — The Standard</h2>
+    <p><strong>On the philosophy:</strong> Logan Hood, the former Navy SEAL who trained Christian Bale for The Dark Knight, built that physique on three principles — functional strength that translates to movement, explosive power that makes a body look athletic rather than static, and conditioning that keeps fat at bay without sacrificing muscle. Every phase of this protocol is built on those three pillars, scaled precisely to your numbers.</p>
+    <p><strong>On the weighted pull-up:</strong> It is the single most visible indicator of the lat and bicep development that defines this silhouette. Protect those sets. Never trade form for load.</p>
+    <p><strong>On the signature circuit:</strong> The AMRAP format is deliberate. It removes the option of pacing — you either work or you don't. The round count is the proof. By Week 12 you should complete 2–3 more rounds than Week 9 at heavier loads. That is adaptation made quantifiable.</p>
+    <p><strong>On identity:</strong> The mask doesn't make you. The work does. Twelve weeks of consistent, relentless action will change more than your body — it changes what you believe you're capable of.</p>
   </div>
-</div>
 
-<!-- ════════════════════════════ WEEK 2 -->
-<div class="week-panel" id="week-2">
-  <div class="week-hdr">
-    <div class="week-num">Week 02 · Phase 2A · 10 Aug – 16 Aug 2026</div>
-    <div class="week-name">LOAD PROGRESSION — <span style="color:var(--gold)">ADD WEIGHT</span></div>
-    <div class="week-theme">Push / Pull / Legs · +2.5–5 kg on all compound lifts</div>
-    <div class="week-focus">All compound lifts progress by 2.5–5 kg from Week 1. Volume holds. <strong>Pull-up load increases to BW+15 kg.</strong> Saturday conditioning circuit adds a 4th round. The body is adapting — keep ahead of it. Log everything.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,500 kcal</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>200g</span></div>
-      <div class="macro-chip"><strong>Carbs:</strong> <span>230g training / 160g rest</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">10 Aug 2026</div></div><div class="day-badge badge-recovery">Active Recovery</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">40-min Zone 2 + 20-min full-body mobility. Add 10-min cold shower protocol for recovery.</div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">11 Aug 2026</div></div><div class="day-badge badge-upper">Push Day — Load Increase</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">77.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Incline DB Press</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">26 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Seated DB Overhead Press</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">22 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Cable Lateral Raise + Face Pull</div><div class="ex-note">Superset A — same as W1</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Same</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Weighted Ring Dip</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW+7.5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Triceps Pushdown + Overhead Ext.</div><div class="ex-note">Superset B</div></td><td class="ex-sets">3 × 15/12</td><td class="ex-load">Same</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-        <div class="circuit-block gold"><div class="circuit-title">Shoulder Density Finisher</div><div class="circuit-item">3 rounds: 12 lateral + 12 front + 12 rear delt. 60 sec rest between rounds.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">12 Aug 2026</div></div><div class="day-badge badge-upper">Pull Day — Back Width Priority</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load / Note</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+15 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Pendlay Row</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">82.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Seated Cable Row (wide grip)</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">+2.5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Single-Arm DB Row</div></td><td class="ex-sets">3 × 12/side</td><td class="ex-load">+2 kg DBs</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Chest-Supported Rear Delt Fly</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Same</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Lat Pulldown</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">+2.5 kg</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Incline DB Curl + Hammer Curl</div><div class="ex-note">Superset B</div></td><td class="ex-sets">3 × 12/12</td><td class="ex-load">Same</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">13 Aug 2026</div></div><div class="day-badge badge-lower">Legs — Deadlift + Volume</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Deadlift</div><div class="ex-note">Added this week — primary mover for total body mass</div></td><td class="ex-sets">3 × 5</td><td class="ex-load">115 kg (82%)</td><td class="ex-rest">4 min</td></tr>
-          <tr><td><div class="ex-name">Back Squat</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">92.5 kg (77%)</td><td class="ex-rest">3–4 min</td></tr>
-          <tr><td><div class="ex-name">Romanian Deadlift</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">92.5 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Bulgarian Split Squat</div></td><td class="ex-sets">3 × 10/leg</td><td class="ex-load">18 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Leg Curl + Leg Extension</div><div class="ex-note">Superset A</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Hip Thrust</div></td><td class="ex-sets">4 × 12</td><td class="ex-load">82.5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Ab Circuit: Rollout + Leg Raise + Plank</div></td><td class="ex-sets">3 rounds</td><td class="ex-load">BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-        <div class="circuit-block gold"><div class="circuit-title">Post-Legs: 20-min incline walk</div><div class="circuit-item">10% incline — mandatory every leg day to manage body composition during lean bulk</div></div>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">14 Aug 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Week 2 Check</h4><p>You should feel measurably stronger on all lifts vs Week 1. If not — sleep, protein, or effort is lacking. Identify which and fix it immediately.</p></div><div class="rest-item"><h4>Recovery</h4><p>Cold shower. Foam roll. 9 hrs sleep. Magnesium. The compound interest of recovery is strength.</p></div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">15 Aug 2026</div></div><div class="day-badge badge-upper">Upper Strength + 4-Round Circuit</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+15 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Overhead Press</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">62.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Bent-Over Row</div></td><td class="ex-sets">4 × 8</td><td class="ex-load">82.5 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Weighted Dip</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW+5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Cable Cross + Straight-Arm Pulldown</div><div class="ex-note">Superset A</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Same</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-        <div class="circuit-block red"><div class="circuit-title">Batman Circuit — 4 Rounds</div><div class="circuit-item">4 rounds: 10 pull-ups + 15 push-ups + 20 air squats + 10 dips — rest 75 sec between rounds</div><div class="circuit-item">Rest is decreasing each week. Track your time. Post it. Own it.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">16 Aug 2026</div></div><div class="day-badge badge-recovery">Zone 2 + Meal Prep</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">65-min Zone 2 outdoor. Keep heart rate 120–140 bpm.</div><div class="circuit-item">Meal prep for the week. Weigh yourself and take notes. The lean bulk should add 0.3–0.5 kg this week.</div></div></div></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════ WEEK 3 -->
-<div class="week-panel" id="week-3">
-  <div class="week-hdr">
-    <div class="week-num">Week 03 · Phase 2A · 17 Aug – 23 Aug 2026</div>
-    <div class="week-name">VOLUME PEAK — <span style="color:var(--gold)">PHASE 2A CLIMAX</span></div>
-    <div class="week-theme">Push / Pull / Legs · Highest Volume of Phase 2A</div>
-    <div class="week-focus">This is the hardest week of Phase 2A. Volume peaks — an extra set on each main compound. Pull-up load increases. <strong>Saturday introduces medicine ball work and explosive push-ups</strong> as a preview of Phase 2B. The muscle soreness this week is construction noise — the building is going up.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,550 kcal</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>200g</span></div>
-      <div class="macro-chip"><strong>Note:</strong> <span>Body fat check — if &gt;13.5%, reduce surplus to +150 kcal</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">17 Aug 2026</div></div><div class="day-badge badge-recovery">Active Recovery</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">40-min Zone 2. Full-body yoga flow or mobility work 20 min. Focus on hip flexors — they're taking a beating from squats and split squats.</div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">18 Aug 2026</div></div><div class="day-badge badge-upper">Push — Volume Peak (5 sets bench)</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div><div class="ex-note">5 sets this week — peak push volume</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">80 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Incline DB Press</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">28 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Seated DB Overhead Press</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">24 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Arnold Press (rotation focus)</div><div class="ex-note">Controlled rotation — develops front and lateral head simultaneously</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">18 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Cable Lateral Raise + Face Pull</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">+1 set</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Weighted Ring Dip</div></td><td class="ex-sets">4 × 8</td><td class="ex-load">BW+10 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss blue">B</span>Triceps Drop Set</div><div class="ex-note">3 drops — pushdown to overhead ext to kickback</div></td><td class="ex-sets">3 × drop</td><td class="ex-load">Heavy→Light</td><td class="ex-rest">2 min</td></tr>
-        </table>
-        <div class="circuit-block gold"><div class="circuit-title">Shoulder Density Finisher — Extended</div><div class="circuit-item">4 rounds: 12 lateral + 12 front + 12 rear delt + 10 upright row — no rest between exercises, 60 sec between rounds</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">19 Aug 2026</div></div><div class="day-badge badge-upper">Pull — 5-Set Pull-Up Week</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div><div class="ex-note">6 sets this week — peak lat volume</div></td><td class="ex-sets">6 × 5</td><td class="ex-load">BW+15 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Pendlay Row</div></td><td class="ex-sets">5 × 6</td><td class="ex-load">85 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">T-Bar Row</div><div class="ex-note">Replaces cable row this week — thickness builder</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">Moderate</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Single-Arm DB Row</div></td><td class="ex-sets">3 × 12/side</td><td class="ex-load">Heavy</td><td class="ex-rest">0</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Chest-Supported Rear Delt Fly</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">+1 set</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Lat Pulldown</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Myo-Rep Bicep Curl</div><div class="ex-note">10 reps, 5-sec, 3 reps, 5-sec, 3 reps × 3 rounds</div></td><td class="ex-sets">3 × myo</td><td class="ex-load">Moderate</td><td class="ex-rest">2 min</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">20 Aug 2026</div></div><div class="day-badge badge-lower">Legs — Peak Volume with Deadlift 4×5</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Deadlift</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">117.5 kg (84%)</td><td class="ex-rest">4 min</td></tr>
-          <tr><td><div class="ex-name">Back Squat</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">95 kg (79%)</td><td class="ex-rest">3–4 min</td></tr>
-          <tr><td><div class="ex-name">Romanian Deadlift</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">95 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Bulgarian Split Squat</div></td><td class="ex-sets">4 × 10/leg</td><td class="ex-load">20 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Leg Curl + Leg Extension</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">+2.5 kg</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Hip Thrust</div></td><td class="ex-sets">4 × 12</td><td class="ex-load">87.5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Calf Raise + Ab Roller superset</div></td><td class="ex-sets">4 rounds</td><td class="ex-load">Heavy/BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">21 Aug 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Progress Check</h4><p>3 weeks in. You should be 1–1.5 kg heavier than Aug 1 — and leaner or the same body fat. If fat is creeping up, cut training day surplus to +150 kcal immediately.</p></div><div class="rest-item"><h4>Visualisation</h4><p>"The Dark Knight doesn't leave things to chance." Review Saturday's session. Know every weight. Know every rep target. Walk in prepared.</p></div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">22 Aug 2026</div></div><div class="day-badge badge-combat">Upper Strength + Explosive Preview</div></div>
-      <div class="day-body">
-        <div class="day-desc">First introduction to explosive upper body work — medicine ball chest passes, clap push-ups. Phase 2B starts in 2 weeks. Prepare your nervous system now.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+17.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Overhead Press</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">65 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Bent-Over Row</div></td><td class="ex-sets">4 × 8</td><td class="ex-load">85 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Medicine Ball Chest Pass</div><div class="ex-note">Explosive — against wall or with partner — max velocity</div></td><td class="ex-sets">4 × 8</td><td class="ex-load">6 kg ball</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Clap Push-Up</div><div class="ex-note">Explosive — if needed, drop to knees until strength is there</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Weighted Dip</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW+7.5 kg</td><td class="ex-rest">2 min</td></tr>
-        </table>
-        <div class="circuit-block red"><div class="circuit-title">Batman Circuit — 4 Rounds, 60-sec Rest</div><div class="circuit-item">4 rounds: 10 pull-ups + 15 push-ups + 20 air squats + 10 dips — 60 sec rest between rounds</div><div class="circuit-item">Rest is now 60 seconds. This is harder than it looks. Hold the form.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">23 Aug 2026</div></div><div class="day-badge badge-recovery">Zone 2 + Recovery</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">70-min Zone 2. Longest aerobic session so far. Outdoor preferred.</div><div class="circuit-item">Weekly weigh-in. Target: +0.3–0.5 kg lean mass. Anything more — audit the food.</div></div></div></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════ WEEK 4 (DELOAD) -->
-<div class="week-panel" id="week-4">
-  <div class="week-hdr">
-    <div class="week-num">Week 04 · Phase 2A Deload · 24 Aug – 30 Aug 2026</div>
-    <div class="week-name">TACTICAL RESET — <span style="color:var(--blue-bright)">DELOAD</span></div>
-    <div class="week-theme">Reduce Volume 40% · Maintain Intensity · CNS Recovery</div>
-    <div class="week-focus">Three weeks of high-volume hypertrophy requires a reset. <strong>Cut sets by 40%, keep loads the same.</strong> This isn't weakness — it's periodisation. The body grows during recovery. Phase 2B begins next week; arrive at it fresh, primed, and ready to go heavier. Do not overtrain this week.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>All Days:</strong> <span>~2,200 kcal (slight surplus reduction)</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>200g maintained</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">24 Aug 2026</div></div><div class="day-badge badge-recovery">Active Recovery</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Deload Recovery</div><div class="circuit-item">30-min easy walk. Full-body mobility 30 min. No intensity — this is deliberate rest.</div></div></div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">TUESDAY</div><div class="day-date">25 Aug 2026</div></div><div class="day-badge badge-upper">Push Deload — 60% Volume</div></div><div class="day-body">
-      <table class="ex-table">
-        <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-        <tr><td><div class="ex-name">Barbell Bench Press</div></td><td class="ex-sets">3 × 5</td><td class="ex-load">80 kg</td><td class="ex-rest">3 min</td></tr>
-        <tr><td><div class="ex-name">Incline DB Press</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">Same</td><td class="ex-rest">2 min</td></tr>
-        <tr><td><div class="ex-name">Seated DB Overhead Press</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">Same</td><td class="ex-rest">2 min</td></tr>
-        <tr><td><div class="ex-name">Lateral Raise + Triceps — light</div></td><td class="ex-sets">2 × 15</td><td class="ex-load">Light</td><td class="ex-rest">90 sec</td></tr>
-      </table>
-    </div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">WEDNESDAY</div><div class="day-date">26 Aug 2026</div></div><div class="day-badge badge-upper">Pull Deload</div></div><div class="day-body">
-      <table class="ex-table">
-        <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-        <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">3 × 5</td><td class="ex-load">BW+15 kg</td><td class="ex-rest">3 min</td></tr>
-        <tr><td><div class="ex-name">Barbell Row</div></td><td class="ex-sets">3 × 6</td><td class="ex-load">Same</td><td class="ex-rest">3 min</td></tr>
-        <tr><td><div class="ex-name">Cable Row + Straight-Arm Pulldown</div></td><td class="ex-sets">2 × 12</td><td class="ex-load">Moderate</td><td class="ex-rest">2 min</td></tr>
-        <tr><td><div class="ex-name">Curls</div></td><td class="ex-sets">2 × 12</td><td class="ex-load">Light</td><td class="ex-rest">90 sec</td></tr>
-      </table>
-    </div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">THURSDAY</div><div class="day-date">27 Aug 2026</div></div><div class="day-badge badge-lower">Legs Deload</div></div><div class="day-body">
-      <table class="ex-table">
-        <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-        <tr><td><div class="ex-name">Deadlift</div></td><td class="ex-sets">2 × 4</td><td class="ex-load">115 kg</td><td class="ex-rest">4 min</td></tr>
-        <tr><td><div class="ex-name">Back Squat</div></td><td class="ex-sets">3 × 4</td><td class="ex-load">90 kg</td><td class="ex-rest">3–4 min</td></tr>
-        <tr><td><div class="ex-name">Romanian DL + Hip Thrust</div></td><td class="ex-sets">2 × 10</td><td class="ex-load">Moderate</td><td class="ex-rest">2 min</td></tr>
-        <tr><td><div class="ex-name">Ab Rollout</div></td><td class="ex-sets">3 × 10</td><td class="ex-load">BW</td><td class="ex-rest">60 sec</td></tr>
-      </table>
-    </div></div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">28 Aug 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Phase 2A Complete</h4><p>4 weeks of hypertrophy work done. You should be 1.5–2 kg heavier than Aug 1, with body fat at or below 12–13%. The scaffolding is up. Phase 2B builds on it with power and explosiveness.</p></div><div class="rest-item"><h4>Phase 2B Preview</h4><p>Monday begins Week 5. Hang cleans, power snatches, box jumps, and battle ropes arrive. The physique stops looking built and starts looking <em>dangerous</em>.</p></div></div></div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SATURDAY</div><div class="day-date">29 Aug 2026</div></div><div class="day-badge badge-upper">Upper Light + Circuit Assessment</div></div><div class="day-body">
-      <table class="ex-table">
-        <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-        <tr><td><div class="ex-name">Weighted Pull-Up + OHP + Row</div></td><td class="ex-sets">3 × 5–6</td><td class="ex-load">Moderate</td><td class="ex-rest">3 min</td></tr>
-        <tr><td><div class="ex-name">Accessory work (light)</div></td><td class="ex-sets">2 × 15</td><td class="ex-load">Light</td><td class="ex-rest">90 sec</td></tr>
-      </table>
-      <div class="circuit-block red"><div class="circuit-title">Circuit Assessment — Re-test Week 1 Baseline</div><div class="circuit-item">Re-run the Week 1 circuit time: 10 pull-ups + 15 push-ups + 20 air squats + 10 dips — 3 rounds, 90-sec rest</div><div class="circuit-item">Compare to Week 1 time. You should be faster. This is your Phase 2A performance gain made visible.</div></div>
-    </div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">30 Aug 2026</div></div><div class="day-badge badge-recovery">Rest + Prep</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">60-min easy Zone 2. Meal prep for Week 5. Read Phase 2B programming tonight. Phase 2B begins Monday.</div></div></div></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════ WEEKS 5–8: PHASE 2B -->
-<div class="week-panel" id="week-5">
-  <div class="week-hdr">
-    <div class="week-num">Week 05 · Phase 2B Opens · 31 Aug – 6 Sep 2026</div>
-    <div class="week-name">POWER IGNITION — <span style="color:#cc5533">THE DANGEROUS BODY</span></div>
-    <div class="week-theme">Explosive Power + Heavy Strength + Combat Conditioning</div>
-    <div class="week-focus">Phase 2B changes the stimulus entirely. <strong>Olympic lift variations (hang clean, push press) replace isolation accessories. Plyometric work is introduced. Box jumps, medicine ball slams, battle ropes.</strong> The nervous system is now being trained, not just the muscle. The physique you've built starts to move differently. This is where Batman's athleticism develops.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,500 kcal</span></div>
-      <div class="macro-chip"><strong>Carbs:</strong> <span>Increase to 240g on training days — power work needs fuel</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>200g</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">31 Aug 2026</div></div><div class="day-badge badge-recovery">Active Recovery</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">40-min Zone 2. Add 10 min of dynamic warm-up specific to power work: jump rope, hip circles, thoracic rotations, medicine ball light tosses.</div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">1 Sep 2026</div></div><div class="day-badge badge-power">Power Upper — Hang Clean + Push Press + Strength</div></div>
-      <div class="day-body">
-        <div class="day-desc">The first power session of the program. <strong>Hang clean and push press are Olympic lift variations</strong> used by Logan Hood in Bale's Dark Knight prep. They develop the explosive power and full-body coordination that makes the physique look athletic rather than merely big.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Hang Power Clean</div><div class="ex-note">Teach the movement first — bar from hip hinge, explosive shrug, catch in quarter squat</div></td><td class="ex-sets">5 × 4</td><td class="ex-load">50–60 kg (technique)</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div><div class="ex-note">Dip and drive from legs — explosive overhead — control the descent</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">65 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div><div class="ex-note">Strength maintenance — no eccentric emphasis today, explosive concentric</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">82.5 kg (82.5%)</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+17.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Medicine Ball Slam</div><div class="ex-note">Full body — overhead to slam — explosive absorption</div></td><td class="ex-sets">4 × 10</td><td class="ex-load">8 kg ball</td><td class="ex-rest">60 sec</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Ring Dip (weighted) + Plyo Push-Up</div><div class="ex-note">Strength + power superset</div></td><td class="ex-sets">3 × 6/8</td><td class="ex-load">BW+10 kg / BW</td><td class="ex-rest">2 min</td></tr>
-        </table>
-        <div class="circuit-block blue"><div class="circuit-title">Phase 2B Conditioning: Battle Rope + Box Jump Circuit</div><div class="circuit-item">5 rounds: 20 sec battle rope (alternating waves) → 6 box jumps (60 cm box) → 60 sec rest</div><div class="circuit-item">Maximum intent on every rep. This is power training — not cardio.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">2 Sep 2026</div></div><div class="day-badge badge-upper">Pull — Heavy + Speed</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div><div class="ex-note">Explosive concentric — pull as fast as possible while weighted</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+17.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Pendlay Row</div><div class="ex-note">Explosive — bar bounces off floor, controlled catch</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">87.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Single-Arm DB Snatch</div><div class="ex-note">Power movement — hip drive to overhead in one fluid motion</div></td><td class="ex-sets">3 × 6/arm</td><td class="ex-load">24 kg DB</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Seated Cable Row</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Rear Delt Fly + Face Pull</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Pulldown</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">3 Sep 2026</div></div><div class="day-badge badge-lower">Legs — Power + Heavy</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Power Clean from Floor</div><div class="ex-note">Full Olympic movement — explosive — use appropriate load</div></td><td class="ex-sets">5 × 3</td><td class="ex-load">60–70 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Back Squat — Explosive Concentric</div><div class="ex-note">Lower controlled, drive up as fast as possible</div></td><td class="ex-sets">5 × 4</td><td class="ex-load">100 kg (83%)</td><td class="ex-rest">3–4 min</td></tr>
-          <tr><td><div class="ex-name">Deadlift</div></td><td class="ex-sets">3 × 4</td><td class="ex-load">122.5 kg (87.5%)</td><td class="ex-rest">4 min</td></tr>
-          <tr><td><div class="ex-name">Box Jump</div><div class="ex-note">Step down — do not jump down — 60 cm box</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">BW</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Romanian DL</div></td><td class="ex-sets">3 × 10</td><td class="ex-load">100 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Hip Thrust</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">90 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Ab Circuit</div></td><td class="ex-sets">4 rounds</td><td class="ex-load">BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">4 Sep 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Power Work Note</h4><p>Olympic lifts are skill movements. Your CNS is working harder than in Phase 2A. Sleep becomes even more critical. 9 hours is the standard.</p></div><div class="rest-item"><h4>Technique</h4><p>If your hang clean form is off — film it. Watch it back. The movement should feel like a jump with a barbell, not a deadlift with a shrug.</p></div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">5 Sep 2026</div></div><div class="day-badge badge-combat">Full Body — Combat Conditioning Session</div></div>
-      <div class="day-body">
-        <div class="day-desc">The first full Logan Hood-style combat conditioning session. <strong>This is how Batman trains.</strong> Compound strength + explosive movement + conditioning, back to back. Welcome to Phase 2B Saturday.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+17.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">67.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Bent-Over Row</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">87.5 kg</td><td class="ex-rest">2–3 min</td></tr>
-          <tr><td><div class="ex-name">Dip (weighted)</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW+10 kg</td><td class="ex-rest">2 min</td></tr>
-        </table>
-        <div class="circuit-block red"><div class="circuit-title">The Dark Knight Circuit — Full Version</div><div class="circuit-item">5 rounds for time: 8 weighted pull-ups (BW+10 kg) + 12 push-ups + 8 box jumps + 12 dips + 8 med ball slams — 60 sec rest between rounds</div><div class="circuit-item">Log your time. This circuit is the benchmark of Phase 2B. It gets heavier and faster every week until Week 8.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">6 Sep 2026</div></div><div class="day-badge badge-recovery">Zone 2 + Recovery</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">65-min Zone 2. Body fat check — still tracking toward ≤13%.</div></div></div></div>
-  </div>
-</div>
-
-<!-- WEEKS 6, 7, 8 — structured summaries -->
-<div class="week-panel" id="week-6">
-  <div class="week-hdr">
-    <div class="week-num">Week 06 · Phase 2B · 7 Sep – 13 Sep 2026</div>
-    <div class="week-name">LOAD ESCALATION — <span style="color:#cc5533">POWER PEAK</span></div>
-    <div class="week-theme">Olympic lifts load increases · Dark Knight Circuit adds load</div>
-    <div class="week-focus">Hang clean increases to 65–70 kg. Box jump height moves to 70 cm. <strong>Dark Knight Circuit: pull-ups go to BW+12.5 kg.</strong> Bench increases to 85 kg. Deadlift: 125 kg. Squat: 102.5 kg. The body is adapting to explosive power — it will start looking dramatically different from here. Saturday circuit rest drops to 45 sec.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,500 kcal</span></div>
-      <div class="macro-chip"><strong>Body Fat:</strong> <span>Check weekly — ceiling is 13.5%</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">7 Sep 2026</div></div><div class="day-badge badge-recovery">Active Recovery</div></div><div class="day-body"><div class="day-desc">40-min Zone 2. Dynamic mobility — emphasise shoulders and hips for power work this week.</div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">8 Sep 2026</div></div><div class="day-badge badge-power">Power Upper — Load Increase</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Hang Power Clean</div></td><td class="ex-sets">5 × 4</td><td class="ex-load">65 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">70 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">85 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+20 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Med Ball Slam + Plyo Push-Up</div></td><td class="ex-sets">4 × 10/8</td><td class="ex-load">8 kg / BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-        <div class="circuit-block blue"><div class="circuit-title">Battle Rope + Box Jump — 6 Rounds</div><div class="circuit-item">6 rounds: 20 sec battle rope → 6 box jumps (70 cm) → 50 sec rest</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">9 Sep 2026</div></div><div class="day-badge badge-upper">Pull — Heavier + Single-Arm Snatch</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+20 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">90 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Single-Arm DB Snatch</div></td><td class="ex-sets">3 × 6/arm</td><td class="ex-load">26 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Rear Delt + Face Pull + Straight-Arm PD</div></td><td class="ex-sets">3 × 15</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Bicep Curls (myo-rep)</div></td><td class="ex-sets">3 × myo</td><td class="ex-load">Moderate</td><td class="ex-rest">2 min</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">10 Sep 2026</div></div><div class="day-badge badge-lower">Legs — Power Clean + Heavy Squat + DL</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Power Clean</div></td><td class="ex-sets">5 × 3</td><td class="ex-load">70 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Back Squat (explosive)</div></td><td class="ex-sets">5 × 4</td><td class="ex-load">102.5 kg</td><td class="ex-rest">3–4 min</td></tr>
-          <tr><td><div class="ex-name">Deadlift</div></td><td class="ex-sets">3 × 4</td><td class="ex-load">125 kg</td><td class="ex-rest">4 min</td></tr>
-          <tr><td><div class="ex-name">Box Jump (70 cm)</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">BW</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Romanian DL + Hip Thrust</div></td><td class="ex-sets">3 × 10/12</td><td class="ex-load">100 / 92.5 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Ab Circuit</div></td><td class="ex-sets">4 rounds</td><td class="ex-load">BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">11 Sep 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Six Weeks In</h4><p>Mid-Phase 2 assessment. Target: 2–2.5 kg lean mass added since 1 Aug. Body fat ≤13%. If you're here — the machine is being forged exactly as planned.</p></div><div class="rest-item"><h4>Dark Knight Standard</h4><p>"It's not who I am underneath, but what I do that defines me." Your actions in the gym every day define the outcome. No shortcuts from here.</p></div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">12 Sep 2026</div></div><div class="day-badge badge-combat">Dark Knight Circuit — Loaded</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+20 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">70 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Bent-Over Row</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">90 kg</td><td class="ex-rest">2–3 min</td></tr>
-        </table>
-        <div class="circuit-block red"><div class="circuit-title">Dark Knight Circuit — Week 6</div><div class="circuit-item">5 rounds: 8 pull-ups (BW+12.5 kg) + 12 push-ups + 8 box jumps (70cm) + 12 dips + 10 med ball slams — 45 sec rest</div><div class="circuit-item">You are now operating at a level that would be unrecognisable to the person who started Phase 1.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">13 Sep 2026</div></div><div class="day-badge badge-recovery">Zone 2</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">70-min Zone 2. Progress photos. Assess leanness. Adjust surplus if needed.</div></div></div></div>
-  </div>
-</div>
-
-<div class="week-panel" id="week-7">
-  <div class="week-hdr">
-    <div class="week-num">Week 07 · Phase 2B · 14 Sep – 20 Sep 2026</div>
-    <div class="week-name">MAXIMUM LOAD — <span style="color:#cc5533">NO MERCY</span></div>
-    <div class="week-theme">Peak Power Week · Heaviest lifts of Phase 2B</div>
-    <div class="week-focus">The heaviest week of Phase 2B. Bench: 87.5 kg. Deadlift: 127.5 kg. Squat: 105 kg. <strong>Dark Knight Circuit reaches peak load — pull-ups at BW+15 kg.</strong> You are 11 weeks into this program. The physique built in Phase 2A is now becoming explosive and athletic. Hold every standard. No regression.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,500 kcal</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>200g — do not drop</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">14 Sep 2026</div></div><div class="day-badge badge-recovery">Recovery</div></div><div class="day-body"><div class="day-desc">40-min Zone 2. This week demands it. Foam roll everything.</div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">15 Sep 2026</div></div><div class="day-badge badge-power">Power Upper — Peak Loads</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Hang Power Clean</div></td><td class="ex-sets">5 × 3</td><td class="ex-load">70 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div></td><td class="ex-sets">4 × 4</td><td class="ex-load">72.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div></td><td class="ex-sets">4 × 4</td><td class="ex-load">87.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+20 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Med Ball Slam + Plyo Push-Up</div></td><td class="ex-sets">4 × 10/8</td><td class="ex-load">10 kg / BW</td><td class="ex-rest">60 sec</td></tr>
-          <tr><td><div class="ex-name">Ring Dip (weighted)</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">BW+12.5 kg</td><td class="ex-rest">2 min</td></tr>
-        </table>
-        <div class="circuit-block blue"><div class="circuit-title">Battle Rope + Box Jump — 7 Rounds</div><div class="circuit-item">7 rounds: 20 sec battle rope → 6 box jumps (75 cm) → 45 sec rest. Maximum power output.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">16 Sep 2026</div></div><div class="day-badge badge-upper">Pull — 5×5 Weighted + Heavy Row</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">6 × 5</td><td class="ex-load">BW+20 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">92.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Single-Arm DB Snatch</div></td><td class="ex-sets">4 × 5/arm</td><td class="ex-load">28 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">T-Bar Row + Rear Delt Fly superset</div></td><td class="ex-sets">3 × 10/15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Pulldown + Hammer Curl</div></td><td class="ex-sets">3 × 15/12</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">17 Sep 2026</div></div><div class="day-badge badge-lower">Legs — Heaviest Week of Phase 2B</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Power Clean</div></td><td class="ex-sets">5 × 3</td><td class="ex-load">72.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Back Squat</div></td><td class="ex-sets">4 × 4</td><td class="ex-load">105 kg (87.5%)</td><td class="ex-rest">3–4 min</td></tr>
-          <tr><td><div class="ex-name">Deadlift</div></td><td class="ex-sets">3 × 3</td><td class="ex-load">127.5 kg (91%)</td><td class="ex-rest">4–5 min</td></tr>
-          <tr><td><div class="ex-name">Bulgarian Split Squat</div></td><td class="ex-sets">3 × 8/leg</td><td class="ex-load">24 kg DBs</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Box Jump (75 cm)</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">BW</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Hip Thrust</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">95 kg</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Ab Circuit — Dragon Flag + Rollout</div></td><td class="ex-sets">4 rounds</td><td class="ex-load">BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">18 Sep 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Week 7 Status</h4><p>3 weeks from the end. You should feel different — not just stronger, but more explosive, more athletic. The power work is changing how you move. Trust it.</p></div><div class="rest-item"><h4>Saturday is a War</h4><p>The circuit tomorrow is the hardest version yet. Prepare. Sleep. Eat. The Dark Knight does not arrive unprepared.</p></div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">19 Sep 2026</div></div><div class="day-badge badge-combat">Dark Knight Circuit — Peak Phase 2B</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 5</td><td class="ex-load">BW+20 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div></td><td class="ex-sets">4 × 4</td><td class="ex-load">72.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Bent-Over Row</div></td><td class="ex-sets">3 × 8</td><td class="ex-load">92.5 kg</td><td class="ex-rest">2–3 min</td></tr>
-        </table>
-        <div class="circuit-block red"><div class="circuit-title">Dark Knight Circuit — Week 7 Peak</div><div class="circuit-item">6 rounds: 8 pull-ups (BW+15 kg) + 12 push-ups + 8 box jumps (75 cm) + 12 dips + 10 med ball slams — 45 sec rest</div><div class="circuit-item">"The night is darkest just before the dawn." This is that session. Week 8 is the final Phase 2B test. Earn it here.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">20 Sep 2026</div></div><div class="day-badge badge-recovery">Zone 2 + Assessment</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">70-min Zone 2. Take progress photos. You are 11 weeks in. The transformation is happening. One week of peak intensity, then Phase 2C begins.</div></div></div></div>
-  </div>
-</div>
-
-<div class="week-panel" id="week-8">
-  <div class="week-hdr">
-    <div class="week-num">Week 08 · Phase 2B Peak / Deload · 21 Sep – 27 Sep 2026</div>
-    <div class="week-name">PEAK AND RESET — <span style="color:var(--blue-bright)">PHASE 2B CLOSES</span></div>
-    <div class="week-theme">Peak intensity Mon–Thu · Strategic deload Sat · Phase 2C preview</div>
-    <div class="week-focus">Peak loads on Tuesday and Thursday. <strong>Saturday is a calculated deload — reduced volume, maintained intensity.</strong> This resets the CNS before Phase 2C begins. By Sunday, you should be 3–3.5 kg heavier than Day 1 of Phase 2, with all strength numbers up and body fat still ≤13%. Phase 2C starts Monday Week 9.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Mon–Thu:</strong> <span>~2,500 kcal peak</span></div>
-      <div class="macro-chip"><strong>Sat–Sun:</strong> <span>~2,150 kcal (deload calories)</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">21 Sep 2026</div></div><div class="day-badge badge-recovery">Recovery</div></div><div class="day-body"><div class="day-desc">40-min Zone 2. Prime the CNS with dynamic movement.</div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">22 Sep 2026</div></div><div class="day-badge badge-power">Peak Power Upper</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Hang Power Clean</div></td><td class="ex-sets">5 × 3</td><td class="ex-load">72.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Push Press</div></td><td class="ex-sets">4 × 3</td><td class="ex-load">75 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Barbell Bench Press</div></td><td class="ex-sets">3 × 3</td><td class="ex-load">90 kg (90%)</td><td class="ex-rest">4 min</td></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">5 × 4</td><td class="ex-load">BW+22.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Med Ball Slam + Plyo Push-Up</div></td><td class="ex-sets">3 × 10/8</td><td class="ex-load">10 kg / BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-        <div class="circuit-block blue"><div class="circuit-title">Final Phase 2B Conditioning</div><div class="circuit-item">7 rounds: 20 sec battle rope → 6 box jumps (75 cm) → 45 sec rest. Maximum output on every rep.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">23 Sep 2026</div></div><div class="day-badge badge-upper">Pull — Peak + Last Heavy Row</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">6 × 4</td><td class="ex-load">BW+22.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row — Peak Load</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">95 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Single-Arm Snatch + T-Bar Row</div></td><td class="ex-sets">3 × 5/10</td><td class="ex-load">30 kg / Moderate</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Rear Delt + Straight-Arm PD + Curl</div></td><td class="ex-sets">3 × 15/15/12</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">24 Sep 2026</div></div><div class="day-badge badge-lower">Legs — Phase 2B Peak Squat + DL</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Power Clean — Heaviest Phase 2B</div></td><td class="ex-sets">4 × 3</td><td class="ex-load">75 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Back Squat</div></td><td class="ex-sets">3 × 3</td><td class="ex-load">107.5 kg (89.5%)</td><td class="ex-rest">4 min</td></tr>
-          <tr><td><div class="ex-name">Deadlift — Phase 2B Peak</div></td><td class="ex-sets">2 × 2</td><td class="ex-load">130 kg (92.8%)</td><td class="ex-rest">5 min</td></tr>
-          <tr><td><div class="ex-name">Romanian DL + Hip Thrust</div></td><td class="ex-sets">3 × 10/12</td><td class="ex-load">Progressive</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Ab Circuit — final Phase 2B</div></td><td class="ex-sets">4 rounds</td><td class="ex-load">BW</td><td class="ex-rest">60 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">25 Sep 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Phase 2B Complete</h4><p>8 weeks into Phase 2. You've built a hypertrophy base and layered explosive power on top. Phase 2C is the culmination — the Batman conditioning circuits, the final reveal.</p></div><div class="rest-item"><h4>Assessment</h4><p>Take progress photos. Weigh in. Measure waist, chest, shoulders. Compare to Day 1. The numbers should confirm what the mirror is already showing.</p></div></div></div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SATURDAY</div><div class="day-date">26 Sep 2026</div></div><div class="day-badge badge-upper">Deload Upper + Circuit Re-test</div></div><div class="day-body">
-      <table class="ex-table">
-        <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-        <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">3 × 5</td><td class="ex-load">BW+15 kg</td><td class="ex-rest">3 min</td></tr>
-        <tr><td><div class="ex-name">Push Press + Bent-Over Row</div></td><td class="ex-sets">3 × 5</td><td class="ex-load">Moderate</td><td class="ex-rest">3 min</td></tr>
-        <tr><td><div class="ex-name">Accessory — light</div></td><td class="ex-sets">2 × 15</td><td class="ex-load">Light</td><td class="ex-rest">90 sec</td></tr>
-      </table>
-      <div class="circuit-block red"><div class="circuit-title">Circuit Re-test vs. Week 5 Baseline</div><div class="circuit-item">5 rounds: 8 pull-ups (BW+10 kg) + 12 push-ups + 8 box jumps + 12 dips + 10 med ball slams — 60 sec rest. Compare time to Week 5.</div><div class="circuit-item">Phase 2C begins Monday. Rest, recover, and arrive ready.</div></div>
-    </div></div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">27 Sep 2026</div></div><div class="day-badge badge-recovery">Zone 2 + Phase 2C Briefing</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">60-min Zone 2. Read and memorise Phase 2C programming tonight. Phase 2C starts Monday 28 Sep.</div></div></div></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════ WEEKS 9–12: PHASE 2C -->
-<div class="week-panel" id="week-9">
-  <div class="week-hdr">
-    <div class="week-num">Week 09 · Phase 2C Opens · 28 Sep – 4 Oct 2026</div>
-    <div class="week-name">THE DARK KNIGHT CIRCUIT — <span style="color:var(--blue-bright)">BEGINS</span></div>
-    <div class="week-theme">Full-Body Density Circuits · Logan Hood Methodology · Batman Standard</div>
-    <div class="week-focus"><strong>Phase 2C is the culmination of the entire 23-week program.</strong> The PPL structure of Phase 2A and the power development of Phase 2B now combine into full-body density circuits — Logan Hood's methodology for building the functional, lean, powerful physique that Christian Bale displayed in The Dark Knight. Circuits run on Tuesday, Thursday, and Saturday. Wednesday remains a dedicated pull session. Volume is controlled. Intensity is absolute.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,400 kcal (slight reduction — density work is metabolically demanding)</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>205g</span></div>
-      <div class="macro-chip"><strong>Carbs:</strong> <span>200g — tightly timed around sessions</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">28 Sep 2026</div></div><div class="day-badge badge-recovery">Recovery + Mobility</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">40-min Zone 2. 20-min mobility: shoulder prep, hip flexors, thoracic spine — you need full mobility for the circuits this week.</div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">29 Sep 2026</div></div><div class="day-badge badge-combat">Batman Density Circuit A — Upper/Full Body</div></div>
-      <div class="day-body">
-        <div class="day-desc"><strong>Logan Hood Protocol — The Dark Knight Training Method.</strong> This session mirrors the training philosophy used to build Bale's Batman physique: compound strength movements paired immediately with bodyweight or explosive work in timed density blocks. Rest is earned, not given.</div>
-        <div class="circuit-block gold">
-          <div class="circuit-title">Strength Foundation (before circuits)</div>
-          <div class="circuit-item">Weighted Pull-Up: 4 × 5 @ BW+22.5 kg — 3 min rest — this is non-negotiable, every session</div>
-          <div class="circuit-item">Push Press: 4 × 4 @ 72.5 kg — 3 min rest</div>
-        </div>
-        <div class="circuit-block red">
-          <div class="circuit-title">Batman Density Block 1 — 20 Minutes AMRAP</div>
-          <div class="circuit-item">Complete as many rounds as possible in 20 minutes:</div>
-          <div class="circuit-item">6 Weighted Pull-Ups (BW+10 kg) → 8 Dips (BW+5 kg) → 6 Hang Power Cleans (60 kg) → 10 Med Ball Slams (8 kg) → 8 Ring Push-Ups</div>
-          <div class="circuit-item">Log rounds completed. This is your Week 9 baseline. It increases every week.</div>
-        </div>
-        <div class="circuit-block blue">
-          <div class="circuit-title">Finisher — Sprint Protocol</div>
-          <div class="circuit-item">6 × 30 sec treadmill sprint (16–18 km/h) → 30 sec rest. This is the conditioning edge.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">30 Sep 2026</div></div><div class="day-badge badge-upper">Pull — Dedicated Back Session (maintained)</div></div>
-      <div class="day-body">
-        <div class="day-desc">Wednesday remains a dedicated pull session — the V-taper architecture must be maintained and grown through Phase 2C. Weighted pull-ups are the non-negotiable anchor.</div>
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">6 × 5</td><td class="ex-load">BW+22.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row</div></td><td class="ex-sets">4 × 6</td><td class="ex-load">92.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Pulldown</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name"><span class="ss">A</span>Rear Delt Fly + Face Pull</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Bicep Curl (various)</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">1 Oct 2026</div></div><div class="day-badge badge-combat">Batman Density Circuit B — Lower/Full Body</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold">
-          <div class="circuit-title">Strength Foundation</div>
-          <div class="circuit-item">Back Squat: 4 × 4 @ 105 kg — 3-4 min rest</div>
-          <div class="circuit-item">Deadlift: 3 × 3 @ 125 kg — 4 min rest</div>
-        </div>
-        <div class="circuit-block red">
-          <div class="circuit-title">Batman Density Block 2 — 20 Minutes AMRAP</div>
-          <div class="circuit-item">Complete as many rounds as possible in 20 minutes:</div>
-          <div class="circuit-item">6 Power Cleans (65 kg) → 8 Box Jumps (70 cm) → 6 Bulgarian Split Squats/leg (20 kg DBs) → 10 Hip Thrusts (90 kg) → 10 Ab Rollouts</div>
-          <div class="circuit-item">Log rounds. Control the movements — this is not a sloppy metcon. Every rep earns its place.</div>
-        </div>
-        <div class="circuit-block blue">
-          <div class="circuit-title">Finisher</div>
-          <div class="circuit-item">6 × 30 sec sprint (16 km/h) → 30 sec rest</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">2 Oct 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Phase 2C Started</h4><p>The density circuits are a different stimulus. You will feel them in your CNS, not just your muscles. Sleep is critical. 9 hours every night this phase.</p></div><div class="rest-item"><h4>Saturday Incoming</h4><p>Saturday is the full Batman Circuit — the signature session of the entire 23-week program. Prepare properly.</p></div></div></div></div>
-
-    <div class="day-card" style="border-color: var(--gold-dim);">
-      <div class="day-hdr" style="background: #0c0a04;">
-        <div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">3 Oct 2026</div></div>
-        <div class="day-badge badge-combat">THE BATMAN CIRCUIT — Signature Session</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc"><strong>This is the session. Logan Hood's full combat conditioning methodology. Mark Twight's density. Gregory Joujon-Roche's aesthetic intent. Everything in this program has been building to this.</strong></div>
-        <div class="circuit-block gold">
-          <div class="circuit-title">Strength Anchors</div>
-          <div class="circuit-item">Weighted Pull-Up: 4 × 5 @ BW+22.5 kg — 3 min rest</div>
-          <div class="circuit-item">Push Press: 3 × 5 @ 72.5 kg — 3 min rest</div>
-          <div class="circuit-item">Bench Press: 3 × 5 @ 87.5 kg — 3 min rest</div>
-        </div>
-        <div class="circuit-block red">
-          <div class="circuit-title">THE BATMAN CIRCUIT — 25 Minutes AMRAP</div>
-          <div class="circuit-item">As many rounds as possible in 25 minutes — every rep counts:</div>
-          <div class="circuit-item">5 Weighted Pull-Ups (BW+12.5 kg) → 8 Ring Dips (BW+5 kg) → 6 Hang Power Cleans (65 kg) → 8 Box Jumps (70 cm) → 10 Med Ball Slams (8 kg) → 12 Push-Ups</div>
-          <div class="circuit-item">No music. No distractions. Just you and the circuit. Log every round.</div>
-          <div class="circuit-item">"Why do we fall, sir? So that we can learn to pick ourselves up." — Alfred. Pick yourself up and do another round.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">4 Oct 2026</div></div><div class="day-badge badge-recovery">Zone 2</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">65-min Zone 2. Fasted. Body fat should still be holding ≤13%. The metabolic demand of the circuits will keep fat at bay.</div></div></div></div>
-  </div>
-</div>
-
-<div class="week-panel" id="week-10">
-  <div class="week-hdr">
-    <div class="week-num">Week 10 · Phase 2C · 5 Oct – 11 Oct 2026</div>
-    <div class="week-name">CIRCUIT ESCALATION — <span style="color:var(--blue-bright)">ADD ROUNDS</span></div>
-    <div class="week-theme">AMRAP time increases to 22 minutes · Batman Circuit 28 minutes · Load progresses</div>
-    <div class="week-focus">Density block time increases from 20 to 22 minutes. The Batman Circuit extends to 28 minutes. <strong>Circuit loads increase: pull-ups to BW+15 kg in circuits, power cleans to 67.5 kg, box jumps to 75 cm.</strong> Strength anchors maintain Week 9 loads. This week separates those who've been training from those who've been preparing.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,400 kcal</span></div><div class="macro-chip"><strong>Protein:</strong> <span>205g — protect the muscle while circuits run hot</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">5 Oct 2026</div></div><div class="day-badge badge-recovery">Recovery</div></div><div class="day-body"><div class="day-desc">40-min Zone 2. Thorough mobility work — hip flexors especially. The circuit volume is peaking.</div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">6 Oct 2026</div></div><div class="day-badge badge-combat">Batman Density Circuit A — 22 Minutes</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors</div><div class="circuit-item">Weighted Pull-Up: 4 × 5 @ BW+22.5 kg · Push Press: 4 × 4 @ 75 kg</div></div>
-        <div class="circuit-block red"><div class="circuit-title">Density Block 1 — 22 Minutes AMRAP</div>
-          <div class="circuit-item">6 Weighted Pull-Ups (BW+15 kg) → 8 Dips (BW+7.5 kg) → 6 Hang Power Cleans (67.5 kg) → 10 Med Ball Slams (10 kg) → 8 Ring Push-Ups</div>
-          <div class="circuit-item">Compare rounds to Week 9. You should complete more at higher loads. That is adaptation made visible.</div>
-        </div>
-        <div class="circuit-block blue"><div class="circuit-title">Sprint Finisher</div><div class="circuit-item">8 × 30 sec sprint (17 km/h) → 30 sec rest. Two extra rounds from Week 9.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">7 Oct 2026</div></div><div class="day-badge badge-upper">Pull — Load Increase</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up</div></td><td class="ex-sets">6 × 5</td><td class="ex-load">BW+25 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">95 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Straight-Arm Pulldown + Rear Delt + Curl</div></td><td class="ex-sets">4 × 15/15/12</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">8 Oct 2026</div></div><div class="day-badge badge-combat">Batman Density Circuit B — 22 Minutes</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors</div><div class="circuit-item">Back Squat: 4 × 4 @ 107.5 kg · Deadlift: 3 × 3 @ 127.5 kg</div></div>
-        <div class="circuit-block red"><div class="circuit-title">Density Block 2 — 22 Minutes AMRAP</div>
-          <div class="circuit-item">6 Power Cleans (67.5 kg) → 8 Box Jumps (75 cm) → 6 Bulgarian Split Squats/leg (22 kg DBs) → 10 Hip Thrusts (92.5 kg) → 10 Ab Rollouts</div>
-        </div>
-        <div class="circuit-block blue"><div class="circuit-title">Sprint Finisher</div><div class="circuit-item">8 × 30 sec sprint → 30 sec rest</div></div>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">9 Oct 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Two Weeks Left</h4><p>Week 10 of 12. Everything you've built in 21 weeks is showing. The Batman circuit is getting faster. The body is lighter, stronger, and more explosive simultaneously.</p></div><div class="rest-item"><h4>Saturday</h4><p>The Batman Circuit: 28 minutes. New territory. Plan for it. The Dark Knight doesn't improvise — he executes.</p></div></div></div></div>
-
-    <div class="day-card" style="border-color: var(--gold-dim);">
-      <div class="day-hdr" style="background: #0c0a04;"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">10 Oct 2026</div></div><div class="day-badge badge-combat">THE BATMAN CIRCUIT — 28 Minutes</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors</div><div class="circuit-item">Weighted Pull-Up 4×5 @ BW+25 kg · Push Press 3×5 @ 75 kg · Bench 3×5 @ 87.5 kg</div></div>
-        <div class="circuit-block red"><div class="circuit-title">THE BATMAN CIRCUIT — 28 Minutes AMRAP</div>
-          <div class="circuit-item">5 Weighted Pull-Ups (BW+15 kg) → 8 Ring Dips (BW+7.5 kg) → 6 Hang Power Cleans (67.5 kg) → 8 Box Jumps (75 cm) → 10 Med Ball Slams (10 kg) → 12 Push-Ups</div>
-          <div class="circuit-item">Three minutes longer than Week 9. The rounds should be higher. The machine runs on demand.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">11 Oct 2026</div></div><div class="day-badge badge-recovery">Zone 2</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">70-min Zone 2. Progress photos. Two weeks remain. The finish line is in sight — hold every standard.</div></div></div></div>
-  </div>
-</div>
-
-<div class="week-panel" id="week-11">
-  <div class="week-hdr">
-    <div class="week-num">Week 11 · Phase 2C · 12 Oct – 18 Oct 2026</div>
-    <div class="week-name">THE FINAL PUSH — <span style="color:var(--blue-bright)">ONE WEEK FROM THE STANDARD</span></div>
-    <div class="week-theme">Peak circuit loads · 25-minute density blocks · Batman Circuit 30 minutes</div>
-    <div class="week-focus">The penultimate week. <strong>Density blocks hit 25 minutes — the longest and hardest of the program.</strong> Batman Circuit runs 30 minutes. Sprint finisher: 10 rounds. <strong>This is the last week of full peak intensity before the final assessment week.</strong> Strength anchors hold Week 10 loads. The Dark Knight standard is one week away. Do not leave anything in reserve.</div>
-    <div class="week-macros">
-      <div class="macro-chip"><strong>Training Days:</strong> <span>~2,400 kcal</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>210g — peak muscle protection</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">12 Oct 2026</div></div><div class="day-badge badge-recovery">Recovery + Mental Prep</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">40-min Zone 2. This week demands everything you have. Use today to prepare mentally. Visualise each session. Plan each load.</div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">13 Oct 2026</div></div><div class="day-badge badge-combat">Density Circuit A — 25 Minutes Peak</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors</div><div class="circuit-item">Weighted Pull-Up: 4 × 5 @ BW+25 kg · Push Press: 4 × 4 @ 77.5 kg</div></div>
-        <div class="circuit-block red"><div class="circuit-title">Density Block 1 — 25 Minutes AMRAP (Peak)</div>
-          <div class="circuit-item">6 Weighted Pull-Ups (BW+17.5 kg) → 8 Dips (BW+10 kg) → 6 Hang Power Cleans (70 kg) → 10 Med Ball Slams (10 kg) → 8 Ring Push-Ups</div>
-          <div class="circuit-item">Peak load. Peak duration. This is the hardest single session in the entire program. Execute perfectly.</div>
-        </div>
-        <div class="circuit-block blue"><div class="circuit-title">Sprint Finisher — 10 Rounds</div><div class="circuit-item">10 × 30 sec sprint (17–18 km/h) → 30 sec rest. The last time this finisher runs at full volume.</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">14 Oct 2026</div></div><div class="day-badge badge-upper">Pull — Peak Load Session</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up — Program Peak</div></td><td class="ex-sets">6 × 5</td><td class="ex-load">BW+25 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row — Program Peak</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">97.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Single-Arm DB Row</div></td><td class="ex-sets">3 × 10/side</td><td class="ex-load">Heavy</td><td class="ex-rest">2 min</td></tr>
-          <tr><td><div class="ex-name">Rear Delt + Face Pull + Curl</div></td><td class="ex-sets">4 × 15/15/12</td><td class="ex-load">Progressive</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">15 Oct 2026</div></div><div class="day-badge badge-combat">Density Circuit B — 25 Minutes Peak + Heavy Squat/DL</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors — Program Peak Loads</div><div class="circuit-item">Back Squat: 4 × 3 @ 110 kg (91.6%) · Deadlift: 3 × 2 @ 132.5 kg (94.6%)</div></div>
-        <div class="circuit-block red"><div class="circuit-title">Density Block 2 — 25 Minutes AMRAP</div>
-          <div class="circuit-item">6 Power Cleans (70 kg) → 8 Box Jumps (75 cm) → 6 Bulgarian Split Squats/leg (24 kg DBs) → 10 Hip Thrusts (95 kg) → 10 Ab Rollouts</div>
-          <div class="circuit-item">You've done this before. You know you can finish it. The only question is how many rounds.</div>
-        </div>
-        <div class="circuit-block blue"><div class="circuit-title">Sprint Finisher</div><div class="circuit-item">10 × 30 sec sprint → 30 sec rest</div></div>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">16 Oct 2026</div></div><div class="day-badge badge-rest">Full Rest</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>One Week Left</h4><p>Week 12 is the final week. Saturday of next week is the last Batman Circuit. Sunday is the assessment. You are 23 weeks into the most demanding program you have ever done.</p></div><div class="rest-item"><h4>Rest Now</h4><p>9 hours. Cold shower. Foam roll. Nutrition perfect. The final week begins Monday. Arrive there completely recovered and ready to finish what you started.</p></div></div></div></div>
-
-    <div class="day-card" style="border-color: var(--gold-dim);">
-      <div class="day-hdr" style="background: #0c0a04;"><div class="day-name-wrap"><div class="day-name gold">SATURDAY</div><div class="day-date">17 Oct 2026</div></div><div class="day-badge badge-combat">THE BATMAN CIRCUIT — 30 Minutes</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors</div><div class="circuit-item">Weighted Pull-Up 4×5 @ BW+25 kg · Push Press 3×4 @ 77.5 kg · Bench 3×4 @ 90 kg</div></div>
-        <div class="circuit-block red"><div class="circuit-title">THE BATMAN CIRCUIT — 30 Minutes AMRAP</div>
-          <div class="circuit-item">5 Weighted Pull-Ups (BW+17.5 kg) → 8 Ring Dips (BW+10 kg) → 6 Hang Power Cleans (70 kg) → 8 Box Jumps (75 cm) → 10 Med Ball Slams (10 kg) → 12 Push-Ups</div>
-          <div class="circuit-item">The penultimate Batman Circuit. 30 minutes. Maximum rounds. Log every single one.</div>
-          <div class="circuit-item">"You have to be a detective and a symbol and a weapon." — You are all three now. One week remains.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">SUNDAY</div><div class="day-date">18 Oct 2026</div></div><div class="day-badge badge-recovery">Zone 2 + Final Prep</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">70-min Zone 2. Fasted. This is the last Sunday of the program. Week 12 starts tomorrow. The final week of the entire 23-week journey begins Monday 19 October.</div></div></div></div>
-  </div>
-</div>
-
-<!-- WEEK 12 — FINAL -->
-<div class="week-panel" id="week-12">
-  <div class="week-hdr">
-    <div class="week-num">Week 12 · Phase 2C Final · 19 Oct – 25 Oct 2026</div>
-    <div class="week-name">THE DARK KNIGHT — <span style="color:var(--gold)">REVEALED</span></div>
-    <div class="week-theme">Final Training Week · Peak Assessment · The Standard Achieved</div>
-    <div class="week-focus"><strong>This is the final week of the entire 23-week Forge the Machine program.</strong> Tuesday and Thursday run the last density circuits — maintained loads, no increases. <strong>Saturday is the Final Batman Circuit — the signature session of the entire program, run one last time at full peak load.</strong> Sunday 25 October is your final assessment. The Dark Knight Standard. Log everything. Measure everything. Photograph everything. You earned it.</div>
-    <div class="week-macros">
-      <div class="macro-chip" style="border-color:var(--gold-dim);"><strong>All Week:</strong> <span>~2,350 kcal — taper slightly</span></div>
-      <div class="macro-chip"><strong>Protein:</strong> <span>210g — maintained to the end</span></div>
-    </div>
-  </div>
-  <div class="days-wrap">
-    <div class="day-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name active">MONDAY</div><div class="day-date">19 Oct 2026</div></div><div class="day-badge badge-recovery">Final Recovery Day</div></div><div class="day-body"><div class="circuit-block green-border"><div class="circuit-title">Protocol</div><div class="circuit-item">40-min Zone 2. This is your last Monday of the program. Every session this week is your last of its kind. Make them count.</div></div></div></div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">TUESDAY</div><div class="day-date">20 Oct 2026</div></div><div class="day-badge badge-combat">Final Density Circuit A</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Strength Anchors</div><div class="circuit-item">Weighted Pull-Up: 4 × 5 @ BW+25 kg · Push Press: 4 × 4 @ 77.5 kg</div></div>
-        <div class="circuit-block red"><div class="circuit-title">Final Density Block 1 — 25 Minutes</div>
-          <div class="circuit-item">6 Weighted Pull-Ups (BW+17.5 kg) → 8 Dips (BW+10 kg) → 6 Hang Power Cleans (70 kg) → 10 Med Ball Slams (10 kg) → 8 Ring Push-Ups</div>
-          <div class="circuit-item">Beat your Week 11 round count. This is the last time you run this block. Make it your best.</div>
-        </div>
-        <div class="circuit-block blue"><div class="circuit-title">Final Sprint Finisher</div><div class="circuit-item">8 × 30 sec sprint → 30 sec rest (slight taper from W11)</div></div>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">WEDNESDAY</div><div class="day-date">21 Oct 2026</div></div><div class="day-badge badge-upper">Final Pull Session — Program Pull-Up Peak</div></div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>
-          <tr><td><div class="ex-name">Weighted Pull-Up — Final Session</div><div class="ex-note">Every set of every session of this program was building to this</div></td><td class="ex-sets">6 × 5</td><td class="ex-load">BW+25 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Pendlay Row — Final Heavy Row</div></td><td class="ex-sets">4 × 5</td><td class="ex-load">97.5 kg</td><td class="ex-rest">3 min</td></tr>
-          <tr><td><div class="ex-name">Rear Delt + Face Pull + Straight-Arm PD</div></td><td class="ex-sets">4 × 15</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-          <tr><td><div class="ex-name">Bicep Curl — last set of the program</div></td><td class="ex-sets">3 × 12</td><td class="ex-load">Moderate</td><td class="ex-rest">90 sec</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card gold-border">
-      <div class="day-hdr"><div class="day-name-wrap"><div class="day-name gold">THURSDAY</div><div class="day-date">22 Oct 2026</div></div><div class="day-badge badge-combat">Final Density Circuit B + Last Squat / DL</div></div>
-      <div class="day-body">
-        <div class="circuit-block gold"><div class="circuit-title">Final Strength Anchors — The Last Heavy Barbell Work</div><div class="circuit-item">Back Squat: 4 × 3 @ 110 kg — the final squat session of 23 weeks. Honour it.</div><div class="circuit-item">Deadlift: 3 × 2 @ 132.5 kg — the last deadlift. Pull it like the whole program depends on it.</div></div>
-        <div class="circuit-block red"><div class="circuit-title">Final Density Block 2 — 25 Minutes</div>
-          <div class="circuit-item">6 Power Cleans (70 kg) → 8 Box Jumps (75 cm) → 6 Bulgarian Split Squats/leg (24 kg DBs) → 10 Hip Thrusts (95 kg) → 10 Ab Rollouts</div>
-          <div class="circuit-item">Last density block. Go until the timer stops. Beat Week 11. Then rest.</div>
-        </div>
-        <div class="circuit-block blue"><div class="circuit-title">Final Sprint Finisher</div><div class="circuit-item">8 × 30 sec sprint → 30 sec rest</div></div>
-      </div>
-    </div>
-
-    <div class="day-card rest-card"><div class="day-hdr"><div class="day-name-wrap"><div class="day-name rest">FRIDAY</div><div class="day-date">23 Oct 2026</div></div><div class="day-badge badge-rest">Full Rest — Penultimate Day</div></div><div class="day-body"><div class="rest-grid-inner"><div class="rest-item"><h4>Tomorrow</h4><p>Saturday 24 October: The Final Batman Circuit. The last training session of the 23-week program. Prepare completely. Sleep 9 hours tonight. Eat perfectly.</p></div><div class="rest-item"><h4>Sunday</h4><p>Sunday 25 October: Final Assessment. Progress photos. Measurements. The Dark Knight Standard revealed. Everything you've done since May is documented on Sunday morning.</p></div></div></div></div>
-
-    <div class="day-card" style="border: 2px solid var(--gold); background: linear-gradient(135deg, #0c0a04 0%, #0a0c12 100%);">
-      <div class="day-hdr" style="background: transparent; border-bottom-color: var(--gold-dim);">
-        <div class="day-name-wrap"><div class="day-name" style="color:var(--gold); font-size:22px; letter-spacing:3px;">SATURDAY</div><div class="day-date">24 Oct 2026</div></div>
-        <div class="day-badge" style="background: var(--gold); color: var(--black); border:none; font-size:11px; letter-spacing:2px; padding:4px 12px; border-radius:3px;">THE FINAL BATMAN CIRCUIT</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc" style="color:var(--gold); font-style:normal; font-size:15px; font-family:'Oswald',sans-serif; letter-spacing:1px; margin-bottom: 20px;">This is the last session of the Forge the Machine program. 24 weeks ago, you couldn't have completed what you are about to do. Execute it perfectly. Leave nothing behind.</div>
-        <div class="circuit-block gold">
-          <div class="circuit-title">Final Strength Anchors</div>
-          <div class="circuit-item">Weighted Pull-Up: 4 × 5 @ BW+25 kg — your pull-up started at BW+10 kg. This is the culmination.</div>
-          <div class="circuit-item">Push Press: 3 × 4 @ 77.5 kg · Bench Press: 3 × 4 @ 90 kg</div>
-        </div>
-        <div class="circuit-block" style="background: #0c0604; border: 2px solid var(--gold-dim); border-radius: 8px; padding: 20px; margin-top: 12px;">
-          <div class="circuit-title" style="color:var(--gold); font-size:18px; font-family:'Oswald',sans-serif; letter-spacing:3px; margin-bottom:14px;">THE BATMAN CIRCUIT — FINAL — 30 MINUTES</div>
-          <div class="circuit-item" style="font-size:14px; color:var(--white);">5 Weighted Pull-Ups (BW+17.5 kg) → 8 Ring Dips (BW+10 kg) → 6 Hang Power Cleans (70 kg) → 8 Box Jumps (75 cm) → 10 Med Ball Slams (10 kg) → 12 Push-Ups</div>
-          <div class="circuit-item" style="margin-top:8px;">30 minutes. Maximum rounds. Every rep done with perfect form. Log the total.</div>
-          <div class="circuit-item" style="color:var(--gold);">"You either die a hero, or you live long enough to see yourself become the villain." You chose hero. Finish it.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card" style="border-color: var(--green-bright);">
-      <div class="day-hdr" style="background: #060c06;">
-        <div class="day-name-wrap"><div class="day-name" style="color:var(--green-bright);">SUNDAY</div><div class="day-date">25 Oct 2026</div></div>
-        <div class="day-badge badge-complete">PROGRAM COMPLETE — FINAL ASSESSMENT</div>
-      </div>
-      <div class="day-body">
-        <div class="day-desc" style="color: var(--green-bright); font-style: normal; font-size: 15px;">The Dark Knight Standard. 12 weeks of Phase 2. 23 weeks total. This is the morning of reckoning.</div>
-        <div class="circuit-block" style="background: #060c06; border-color: #0a2a12; border-radius: 8px; padding: 18px;">
-          <div class="circuit-title" style="color:var(--green-bright);">Final Assessment Protocol</div>
-          <div class="circuit-item">Morning fasted weigh-in. Record weight. Compare to 1 Aug (Phase 2 start).</div>
-          <div class="circuit-item">Progress photos: front, side, back — same conditions as Phase 1 Day 1 and Phase 2 Day 1.</div>
-          <div class="circuit-item">BIA re-scan if possible. Target: ≤12% body fat, +3–4 kg lean mass vs 1 Aug.</div>
-          <div class="circuit-item">Re-test conditioning baseline: 10 pull-ups + 20 push-ups + 20 air squats + 400m run. Compare to 1 Aug.</div>
-          <div class="circuit-item">60-min Zone 2 walk — celebration movement. This is the last structured session.</div>
-          <div class="circuit-item" style="color:var(--gold);">"It's not who I am underneath, but what I do that defines me." Twenty-three weeks of consistent, relentless action. You are no longer who you were on 18 May. The machine is forged. The Dark Knight is real.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════ COACH FINAL -->
-<div class="coach-final">
-  <h2>Coach's Notes — The Dark Knight Standard</h2>
-  <p><strong>On the Batman Physique:</strong> Logan Hood built Christian Bale for The Dark Knight using three principles: functional strength that translates to movement, explosive power that makes the body look athletic rather than static, and conditioning that keeps fat at bay without sacrificing muscle. Every element of Phase 2 is built on those three pillars.</p>
-  <p><strong>On the transition from Phase 1:</strong> Phase 1 was subtraction — removing the fat. Phase 2 is addition and refinement — building the architectural mass of a V-taper, layering explosive power on top, and then revealing it all with density conditioning. The two phases are a complete system. Neither works without the other.</p>
-  <p><strong>On weighted pull-ups:</strong> BW+10 kg to BW+25 kg over 12 weeks is not a small achievement. That is the single most visible indicator of the lat and bicep development that defines the Dark Knight silhouette. Protect those sets. Never compromise their form for the sake of load.</p>
-  <p><strong>On the Batman Circuit:</strong> The AMRAP format is deliberately chosen. It removes the option of pacing — you either work or you don't. The round count is the proof. By Week 12, you should be completing 2–3 more rounds of the same circuit at higher loads than Week 9. That is 12 weeks of adaptation made quantifiable.</p>
-  <p><strong>On the complete 23-week journey:</strong> May to October. Body fat from 22.4% to ≤12%. Lean mass from 36.1 kg toward 39–40 kg. Squat, bench, and deadlift all progressed. Athletic capacity transformed. This is not a fitness program — it was a character transformation. You didn't just change your body. You changed what you believe you're capable of.</p>
-  <p><strong>On what comes next:</strong> Rest for 2 weeks. Let the body consolidate. Then reassess. The foundation now exists to pursue any athletic goal — strength sport, aesthetics, combat sports conditioning. The machine is built. You decide what it does next.</p>
+  <footer>Forged Performance AI · The Protocol Engine · Train hard. Train smart. Consult a physician before beginning any program.</footer>
 </div>
 
 <script>
+/* ════════════════ ENGINE ════════════════ */
+let S = null; // settings
+
+const PCT = { // percentage of 1RM per week, per lift
+  squat:  [75, 77, 80, 62, 82, 84, 86, 65, 88, 90, 92, 92],
+  dead:   [78, 82, 84, 62, 86, 88, 90, 65, 91, 93, 95, 95],
+  bench:  [70, 73, 75, 60, 76, 78, 80, 62, 80, 81, 82, 82],
+  ohp:    [70, 73, 75, 60, 76, 78, 80, 62, 80, 81, 82, 82],
+  pullX:  [0.67, 0.83, 1.0, 0.5, 1.1, 1.2, 1.33, 0.67, 1.4, 1.5, 1.6, 1.67] // × 5RM added load
+};
+const SCHEME = { // sets×reps for main lifts per week
+  squat: ['4×6','4×6','5×6','3×5','4×5','4×4','5×4','3×5','4×3','4×3','4×3','4×3'],
+  dead:  ['3×5','3×5','4×5','2×5','3×4','3×3','4×3','2×5','3×2','3×2','3×2','3×2'],
+  bench: ['4×6','4×6','5×5','3×6','4×5','4×4','5×4','3×6','3×4','3×4','3×4','3×4'],
+  pull:  ['4×5','5×5','6×5','3×5','4×5','5×5','5×5','3×5','4×5','5×5','6×5','6×5']
+};
+const WK_META = [
+  {name:'IGNITION', sub:'BUILD BEGINS', theme:'Push / Pull / Legs · Hypertrophy Foundation', focus:'<strong>Volume is the stimulus.</strong> This week establishes the PPL template. Rest 90 sec on isolation, 3 min on compounds. Eat above maintenance on training days. Every rep is structural investment.'},
+  {name:'ACCUMULATION', sub:'LOAD CLIMBS', theme:'Push / Pull / Legs · Progressive Overload', focus:'Loads step up across every main lift. You should feel measurably stronger than Week 1 — <strong>if not, audit sleep, protein, and effort, in that order.</strong>'},
+  {name:'VOLUME PEAK', sub:'PHASE A CLIMAX', theme:'Push / Pull / Legs · Highest Volume of Phase A', focus:'The hardest week of Phase A — an extra set on each main compound and a pull-up load increase. <strong>The soreness this week is construction noise. The building is going up.</strong>'},
+  {name:'DELOAD', sub:'CONSOLIDATE', theme:'Reduced Load · Full Recovery', focus:'Loads drop to ~62%. Volume halves. <strong>This week is not optional and it is not weakness</strong> — adaptation happens in recovery, not under the bar. Sleep 9 hours. Arrive at Phase B hungry.'},
+  {name:'DETONATION', sub:'POWER BEGINS', theme:'Explosive Power · Olympic Variations Introduced', focus:'Hang power cleans, box jumps, and med-ball work enter the program. Strength moves to heavier, lower-rep clusters. <strong>Move every rep with violent intent — speed is the goal, the load is the tool.</strong>'},
+  {name:'VELOCITY', sub:'RATE OF FORCE', theme:'Explosive Power · Plyometric Progression', focus:'Plyometric volume climbs and clean loads increase. <strong>Quality over quantity on explosive work</strong> — the moment bar speed dies, the set is over.'},
+  {name:'POWER PEAK', sub:'PHASE B CLIMAX', theme:'Explosive Power · Heaviest Cluster Work', focus:'The heaviest week of Phase B. Strength clusters peak and sprint volume tops out. <strong>This is the week the physique starts looking dangerous rather than decorative.</strong>'},
+  {name:'DELOAD', sub:'SHARPEN THE EDGE', theme:'Reduced Load · Prime for Phase C', focus:'Second and final deload. Loads drop, explosiveness stays crisp at light weights. <strong>Phase C is the reveal — arrive rested.</strong>'},
+  {name:'THE CRUCIBLE', sub:'DENSITY BEGINS', theme:'Full-Body Density Circuits · Strength Maintained', focus:'The signature phase. Timed density blocks at fixed loads — your only variable is output. <strong>Log every round count. Week 12 will be measured against this week.</strong>'},
+  {name:'COMPRESSION', sub:'OUTPUT CLIMBS', theme:'Density Progression · Conditioning Builds', focus:'Same blocks, heavier loads, same clock. <strong>Beat last week\u2019s round count.</strong> Nutrition tightens — the reveal is four weeks out.'},
+  {name:'THRESHOLD', sub:'NEAR PEAK', theme:'Density Peak Loading · Final Build', focus:'The heaviest density week. Everything you log this week sets the target for the final test. <strong>No missed sessions. No negotiation.</strong>'},
+  {name:'THE REVEAL', sub:'THE STANDARD ACHIEVED', theme:'Final Week · Peak Assessment', focus:'<strong>The final week.</strong> Maintained loads, no increases. Saturday is the Final Signature Circuit at full peak load. Sunday is your final assessment. Log everything. Measure everything. Photograph everything. You earned it.'}
+];
+
+const $ = id => document.getElementById(id);
+const r25 = (kg) => Math.round(kg / 2.5) * 2.5;       // round to 2.5 kg
+const r5lb = (lb) => Math.round(lb / 5) * 5;          // round to 5 lb
+function fmt(kg) {
+  if (S.units === 'lb') { const lb = r5lb(kg * 2.20462); return lb + ' lb'; }
+  return r25(kg) + ' kg';
+}
+function load(lift, w) { return fmt(S[lift] * PCT[lift][w] / 100); }
+function pullLoad(w) {
+  if (S.pull <= 0) return 'BW · ' + (5 + Math.min(w, 7)) + ' reps';
+  const add = S.units==='lb' ? r5lb(S.pull * 2.20462 * PCT.pullX[w]) + ' lb' : r25(S.pull * PCT.pullX[w]) + ' kg';
+  return 'BW+' + add;
+}
+function rel(lift, pct) { return fmt(S[lift] * pct / 100); } // arbitrary % helper
+function pushPress(w) { return fmt(S.ohp * 1.15 * PCT.ohp[w] / 100); }
+function clean(w) { const base = [0,0,0,0, 50, 53, 56, 42, 56, 57, 58, 58][w]; return fmt(S.squat * base / 100); }
+function dbPair(pctOfSquat) { const v = S.squat * pctOfSquat / 100; return (S.units==='lb' ? r5lb(v*2.20462) + ' lb' : r25(v) + ' kg') + ' DBs'; }
+
+function dateStr(d) { return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'}); }
+function weekDates(w) { // returns array of 7 Dates
+  const out = [];
+  for (let i = 0; i < 7; i++) { const d = new Date(S.start); d.setDate(d.getDate() + w*7 + i); out.push(d); }
+  return out;
+}
+function kcal(w) {
+  const maint = Math.round(S.bw * 31 / 50) * 50;
+  const deload = (w===3 || w===7);
+  const phaseC = w >= 8;
+  const train = phaseC ? maint + 100 : maint + 250;
+  return { maint, train, deload };
+}
+function protein() { return Math.round(S.bw * 2.7 / 5) * 5; }
+
+/* ── day builders ── */
+const esc = s => s; // content is engine-generated, no user injection beyond alias (escaped at insert)
+function dayCard(name, date, badgeCls, badgeTxt, nameCls, bodyHtml, cardCls) {
+  return `<div class="day-card ${cardCls||''}">
+    <div class="day-hdr"><div><div class="day-name ${nameCls||''}">${name}</div><div class="day-date">${dateStr(date)}</div></div>
+    <div class="day-badge ${badgeCls}">${badgeTxt}</div></div>
+    <div class="day-body">${bodyHtml}</div></div>`;
+}
+function exRow(name, note, sets, loadTxt, rest) {
+  return `<tr><td><div class="ex-name">${name}</div>${note?`<div class="ex-note">${note}</div>`:''}</td>
+  <td class="ex-sets">${sets}</td><td class="ex-load">${loadTxt}</td><td class="ex-rest">${rest}</td></tr>`;
+}
+const tbl = rows => `<table class="ex-table"><tr><th>Exercise</th><th>Sets × Reps</th><th>Load</th><th>Rest</th></tr>${rows}</table>`;
+const cb = (cls, title, items) => `<div class="circuit-block ${cls}"><div class="circuit-title">${title}</div>${items.map(i=>`<div class="circuit-item">${i}</div>`).join('')}</div>`;
+
+function recoveryDay(d, extra) {
+  return dayCard('MONDAY', d, 'badge-recovery', 'Active Recovery', 'active',
+    cb('green-border','Morning Movement Protocol',[
+      '40-min Zone 2 walk or easy jog (120–135 bpm) — fasted preferred',
+      '20-min mobility: thoracic rotation, hip flexors, shoulder CARs, ankle dorsiflexion',
+      extra || 'Foam roll: thoracic spine, lats, quads, IT band — 30 sec each']));
+}
+function restFriday(d, items) {
+  return dayCard('FRIDAY', d, 'badge-rest', 'Full Rest', 'rest',
+    `<div class="rest-grid-inner">${items.map(i=>`<div class="rest-item"><h4>${i[0]}</h4><p>${i[1]}</p></div>`).join('')}</div>`, 'rest-card');
+}
+function sundayZ2(d, mins, note) {
+  return dayCard('SUNDAY', d, 'badge-recovery', 'Zone 2 + Meal Prep', 'active',
+    cb('green-border','Protocol',[ mins + '-min Zone 2 outdoor. Heart rate 120–140 bpm.', note ]));
+}
+
+/* Phase A week (0-3) */
+function phaseAWeek(w, D) {
+  const dl = (w===3);
+  const push = tbl(
+    exRow('Barbell Bench Press', dl?'Deload — bar speed crisp':(w===2?'5 sets this week — peak push volume':''), SCHEME.bench[w], load('bench',w), '3 min') +
+    exRow('Incline DB Press','', '4×10', dbPair(dl?16:22+w*1.5), '2 min') +
+    exRow('Seated DB Overhead Press','', dl?'3×10':'4×10', dbPair(dl?13:18+w*1.5), '2 min') +
+    exRow('Cable Lateral Raise + Face Pull','Superset', dl?'3×15':'4×15','Moderate','90 sec') +
+    exRow('Weighted Ring Dip','', dl?'2×8':'3×8', S.pull>0?pullLoad(w).replace('BW+','BW+'):'BW', '2 min') +
+    exRow('Triceps Pushdown','', '3×12','Moderate','90 sec'));
+  const pull = tbl(
+    exRow('Weighted Pull-Up', w===2?'6 sets — peak lat volume':'The anchor lift of the entire protocol', SCHEME.pull[w], pullLoad(w), '3 min') +
+    exRow('Barbell Pendlay Row','', dl?'3×6':(w===2?'5×6':'4×6'), rel('bench', dl?55:72+w*3), '3 min') +
+    exRow('Seated Cable Row / T-Bar Row','', dl?'3×10':'4×10','Moderate','2 min') +
+    exRow('Chest-Supported Rear Delt Fly','Superset with single-arm DB row', dl?'3×15':'4×15','Light–Moderate','90 sec') +
+    exRow('Straight-Arm Lat Pulldown','', '3×15','Progressive','90 sec') +
+    exRow('Bicep Curl','', '3×12','Moderate','90 sec'));
+  const legs = tbl(
+    exRow('Deadlift', w===1?'Added this week — primary mover for total body mass':'', SCHEME.dead[w], load('dead',w) + ` (${PCT.dead[w]}%)`, '4 min') +
+    exRow('Back Squat','', SCHEME.squat[w], load('squat',w) + ` (${PCT.squat[w]}%)`, '3–4 min') +
+    exRow('Romanian Deadlift','', dl?'3×10':'4×10', rel('squat', dl?55:75), '2–3 min') +
+    exRow('Bulgarian Split Squat','', '3×10/leg', dbPair(dl?10:15), '2 min') +
+    exRow('Hip Thrust','', dl?'3×12':'4×12', rel('squat', dl?50:67+w*2), '2 min') +
+    exRow('Ab Circuit: Rollout + Leg Raise + Plank','', '3 rounds','BW','60 sec')) +
+    cb('gold','Post-Legs: 20-min incline walk',['10% incline — mandatory every leg day to manage body composition during the lean build']);
+  const satRows = tbl(
+    exRow('Weighted Pull-Up','', dl?'3×5':'5×5', pullLoad(w), '3 min') +
+    exRow('Barbell Overhead Press','', dl?'3×6':'4×6', load('ohp',w), '3 min') +
+    exRow('Barbell Bent-Over Row','', dl?'3×8':'4×8', rel('bench', dl?55:73), '2–3 min') +
+    exRow('Weighted Dip','', '3×8', 'BW+light', '2 min'));
+  const circ = dl
+    ? cb('blue','Conditioning — Easy',['3 rounds easy: 8 pull-ups + 12 push-ups + 15 air squats — full rest. Stay loose, not gassed.'])
+    : cb('red','The Signature Circuit — ' + (4+(w>=2?1:0)) + ' Rounds',[
+        `${4+(w>=2?1:0)} rounds: 10 pull-ups + 15 push-ups + 20 air squats + 10 dips — rest ${85-w*10} sec between rounds`,
+        'Rest decreases each week. Track your time. Own it.']);
+  return [
+    recoveryDay(D[0]),
+    dayCard('TUESDAY', D[1], 'badge-upper', dl?'Push — Deload':'Push — Chest / Shoulders / Triceps', 'gold', push, 'gold-border'),
+    dayCard('WEDNESDAY', D[2], 'badge-upper', dl?'Pull — Deload':'Pull — Back / Biceps', 'gold', pull, 'gold-border'),
+    dayCard('THURSDAY', D[3], 'badge-lower', dl?'Legs — Deload':'Legs — Squat / Deadlift / Volume', 'gold', legs, 'gold-border'),
+    restFriday(D[4], [['Weekly Check', w===0?'Baseline week. Note how every load felt — the engine assumes these percentages are honest.':'You should feel stronger than last week on all lifts. If not — sleep, protein, or effort is lacking. Identify which and fix it.'],['Recovery','Cold shower. Foam roll. 9 hrs sleep. Magnesium. The compound interest of recovery is strength.']]),
+    dayCard('SATURDAY', D[5], 'badge-upper', dl?'Upper — Light + Easy Circuit':'Upper Strength + Circuit', 'gold', satRows + circ, 'gold-border'),
+    sundayZ2(D[6], 60+w*2, 'Meal prep for the week. Weigh in and log. Lean build target: +0.3–0.5 kg this week.')
+  ].join('');
+}
+
+/* Phase B week (4-7) */
+function phaseBWeek(w, D) {
+  const dl = (w===7);
+  const powerPush = tbl(
+    exRow('Push Press','Explosive — drive from the legs', dl?'3×4':'4×4', pushPress(w), '3 min') +
+    exRow('Barbell Bench Press','Cluster work', SCHEME.bench[w], load('bench',w), '3 min') +
+    exRow('Explosive Push-Up / Med-Ball Chest Pass','Max intent every rep', dl?'3×5':'4×6','BW / 8–10 kg ball','2 min') +
+    exRow('Lateral Raise + Rear Delt Superset','', '3×15','Moderate','90 sec'));
+  const pullB = tbl(
+    exRow('Weighted Pull-Up','', SCHEME.pull[w], pullLoad(w), '3 min') +
+    exRow('Barbell Pendlay Row','Explosive off the floor', dl?'3×5':'4×5', rel('bench', dl?58:78+(w-4)*3), '3 min') +
+    exRow('Single-Arm DB Row','', '3×10/side','Heavy','2 min') +
+    exRow('Face Pull + Straight-Arm Pulldown','Superset', '3×15','Moderate','90 sec') +
+    exRow('Bicep Curl','', '3×12','Moderate','90 sec'));
+  const powerLegs = tbl(
+    exRow('Hang Power Clean','The centerpiece of Phase B — violent hip extension', dl?'3×3':'5×3', clean(w), '3 min') +
+    exRow('Back Squat','Cluster work', SCHEME.squat[w], load('squat',w) + ` (${PCT.squat[w]}%)`, '3–4 min') +
+    exRow('Deadlift','', SCHEME.dead[w], load('dead',w) + ` (${PCT.dead[w]}%)`, '4 min') +
+    exRow('Box Jump','Step down, never rebound', dl?'3×4':'4×5', (60+(w-4)*5) + ' cm', '2 min') +
+    exRow('Ab Rollout + Hanging Leg Raise','', '3 rounds','BW','60 sec'));
+  const satB = tbl(
+    exRow('Weighted Pull-Up','', dl?'3×5':'4×5', pullLoad(w), '3 min') +
+    exRow('Push Press','', dl?'2×4':'3×4', pushPress(w), '3 min') +
+    exRow('Bench Press','', dl?'2×4':'3×4', load('bench',w), '3 min')) +
+    (dl
+      ? cb('blue','Sprint Maintenance',['4 × 30 sec stride → 60 sec walk. Crisp, not crushing.'])
+      : cb('red','Power Circuit — ' + (4+(w-4)) + ' Rounds',[
+          `6 hang power cleans (${clean(w)}) → 8 box jumps → 10 med-ball slams (8–10 kg) → 12 push-ups — rest 90 sec`,
+          'Bar speed is the metric. The moment it dies, rest longer — never grind explosive work.']) +
+        cb('blue','Sprint Finisher',[ (5+(w-4)) + ' × 30 sec sprint → 30 sec rest']));
+  return [
+    recoveryDay(D[0], 'Extra hip and ankle mobility — cleans and jumps demand it.'),
+    dayCard('TUESDAY', D[1], 'badge-combat', dl?'Power Push — Deload':'Power Push — Press / Explosive Upper', 'gold', powerPush, 'gold-border'),
+    dayCard('WEDNESDAY', D[2], 'badge-upper', dl?'Pull — Deload':'Pull — Heavy Row / Pull-Up', 'gold', pullB, 'gold-border'),
+    dayCard('THURSDAY', D[3], 'badge-lower', dl?'Power Legs — Deload':'Power Legs — Cleans / Squat / Jumps', 'gold', powerLegs, 'gold-border'),
+    restFriday(D[4], [['Power Check','Explosive quality should be rising week to week. Film one clean per week from the side — hip extension tells the truth.'],['Recovery','Plyometrics tax tendons. Prioritize sleep and collagen-rich nutrition. Walk daily.']]),
+    dayCard('SATURDAY', D[5], 'badge-combat', dl?'Light Power + Strides':'Strength + Power Circuit', 'gold', satB, 'gold-border'),
+    sundayZ2(D[6], 65, 'Weigh in. Body composition check — if fat is creeping, trim the surplus by 100 kcal.')
+  ].join('');
+}
+
+/* Phase C week (8-11) */
+function phaseCWeek(w, D) {
+  const final = (w===11);
+  const i = w-8; // 0..3
+  const densA = cb('gold','Strength Anchors',[
+      `Weighted Pull-Up: 4 × 5 @ ${pullLoad(w)} · Push Press: 4 × 4 @ ${pushPress(w)}`]) +
+    cb('red', (final?'Final ':'') + 'Density Block 1 — ' + (20+i) + ' Minutes',[
+      `6 weighted pull-ups (${S.pull>0?('BW+'+(S.units==='lb'?r5lb(S.pull*2.20462*1.15)+' lb':r25(S.pull*1.15)+' kg')):'BW'}) → 8 dips (BW+light) → 6 hang power cleans (${clean(w)}) → 10 med-ball slams (8–10 kg) → 8 ring push-ups`,
+      final ? 'Beat your Week 11 round count. This is the last time you run this block. Make it your best.' : 'Maximum quality rounds. Log the count — it is the scoreboard for this phase.']) +
+    cb('blue','Sprint Finisher',[ (8 - (final?0:0)) + ' × 30 sec sprint → 30 sec rest']);
+  const pullC = tbl(
+    exRow('Weighted Pull-Up', final?'Every set of every session was building to this':'', SCHEME.pull[w], pullLoad(w), '3 min') +
+    exRow('Pendlay Row','', '4×5', rel('bench', 86+i), '3 min') +
+    exRow('Rear Delt + Face Pull + Straight-Arm PD','Giant set', '4×15','Moderate','90 sec') +
+    exRow('Bicep Curl', final?'The last curls of the program':'', '3×12','Moderate','90 sec'));
+  const densB = cb('gold', final?'Final Strength Anchors — The Last Heavy Barbell Work':'Strength Anchors',[
+      `Back Squat: ${SCHEME.squat[w]} @ ${load('squat',w)}` + (final?' — the final squat session. Honour it.':''),
+      `Deadlift: ${SCHEME.dead[w]} @ ${load('dead',w)}` + (final?' — the last pull. Make it perfect.':'')]) +
+    cb('red',(final?'Final ':'') + 'Density Block 2 — ' + (20+i) + ' Minutes',[
+      `6 power cleans (${clean(w)}) → 8 box jumps (70–75 cm) → 6 Bulgarian split squats/leg (${dbPair(20)}) → 10 hip thrusts (${rel('squat',79)}) → 10 ab rollouts`,
+      final ? 'Last density block. Go until the timer stops. Beat Week 11. Then rest.' : 'Same block every week this phase. The variable is you.']) +
+    cb('blue','Sprint Finisher',['8 × 30 sec sprint → 30 sec rest']);
+  const sigSat = cb('gold', final?'Final Strength Anchors':'Strength Anchors',[
+      `Weighted Pull-Up: 4 × 5 @ ${pullLoad(w)}` + (final&&S.pull>0?' — this is the culmination.':''),
+      `Push Press: 3 × 4 @ ${pushPress(w)} · Bench Press: 3 × 4 @ ${load('bench',w)}`]) +
+    cb('red','THE SIGNATURE CIRCUIT — ' + (final?'FINAL — ':'') + (25+i+(final?1:0)) + ' MINUTES',[
+      `5 weighted pull-ups (${S.pull>0?('BW+'+(S.units==='lb'?r5lb(S.pull*2.20462*1.15)+' lb':r25(S.pull*1.15)+' kg')):'BW'}) → 8 ring dips → 6 hang power cleans (${clean(w)}) → 8 box jumps → 10 med-ball slams → 12 push-ups`,
+      'Maximum rounds. Every rep with perfect form. Log the total.',
+      `<span class="creed">${final ? 'It was never the mask. It was the work. Finish it.' : 'You don\u2019t rise to the occasion. You fall to your training. Train accordingly.'}</span>`]);
+  const sunday = final
+    ? dayCard('SUNDAY', D[6], 'badge-final', 'PROGRAM COMPLETE — FINAL ASSESSMENT', '',
+        `<div class="day-desc" style="color:var(--green-bright);font-style:normal;">The Standard. Twelve weeks. This is the morning of reckoning.</div>` +
+        cb('green-border','Final Assessment Protocol',[
+          'Morning fasted weigh-in. Record and compare to Week 1.',
+          'Progress photos: front, side, back — same conditions as Day 1.',
+          'Body composition re-scan if available. Compare lean mass and body fat to baseline.',
+          'Re-test conditioning baseline: 10 pull-ups + 20 push-ups + 20 air squats + 400 m run. Compare to Week 1.',
+          '60-min Zone 2 walk — celebration movement.',
+          '<span class="creed">Twelve weeks of consistent, relentless action. You are not who you were on Day 1. The machine is forged.</span>']))
+    : sundayZ2(D[6], 60, 'Weigh in. Conditioning is peaking — keep protein at target and sleep at 8–9 hours.');
+  return [
+    recoveryDay(D[0], final ? 'Your last Monday of the program. Every session this week is the last of its kind. Make them count.' : 'Density weeks demand pristine recovery. Treat Zone 2 as medicine.'),
+    dayCard('TUESDAY', D[1], 'badge-combat', (final?'Final ':'') + 'Density Circuit A', 'gold', densA, 'gold-border'),
+    dayCard('WEDNESDAY', D[2], 'badge-upper', (final?'Final Pull — Program Peak':'Pull — Strength Maintained'), 'gold', pullC, 'gold-border'),
+    dayCard('THURSDAY', D[3], 'badge-combat', (final?'Final ':'') + 'Density Circuit B + Squat / DL', 'gold', densB, 'gold-border'),
+    restFriday(D[4], final
+      ? [['Tomorrow','The Final Signature Circuit — the last training session of the program. Sleep 9 hours tonight. Eat perfectly.'],['Sunday','Final Assessment. Photos. Measurements. Everything you\u2019ve built is documented Sunday morning.']]
+      : [['Density Check','Round counts should climb weekly at equal or heavier loads. That is adaptation made visible.'],['Recovery','This phase burns hot. Guard sleep like a deadline.']]),
+    dayCard('SATURDAY', D[5], final?'badge-final':'badge-combat', final?'THE FINAL SIGNATURE CIRCUIT':'The Signature Circuit', 'gold', sigSat, 'gold-border'),
+    sunday
+  ].join('');
+}
+
+/* ── render ── */
+function buildWeek(w) {
+  const D = weekDates(w);
+  const phase = w<4 ? 'A' : w<8 ? 'B' : 'C';
+  const k = kcal(w);
+  const meta = WK_META[w];
+  const macros = [
+    `<div class="macro-chip"><strong>Training Days:</strong> <span>~${k.deload?k.maint:k.train} kcal${k.deload?' (maintenance — deload)':''}</span></div>`,
+    `<div class="macro-chip"><strong>Rest Days:</strong> <span>~${k.maint} kcal</span></div>`,
+    `<div class="macro-chip"><strong>Protein:</strong> <span>${protein()} g daily</span></div>`
+  ].join('');
+  let days = phase==='A' ? phaseAWeek(w, D) : phase==='B' ? phaseBWeek(w, D) : phaseCWeek(w, D);
+  return `<div class="week-panel${w===0?' active':''}" id="week-${w+1}">
+    <div class="week-hdr">
+      <div class="week-num">Week ${String(w+1).padStart(2,'0')} · Phase ${phase} · ${dateStr(D[0])} – ${dateStr(D[6])}</div>
+      <div class="week-name">${meta.name} — <span style="color:var(--gold)">${meta.sub}</span></div>
+      <div class="week-theme">${meta.theme}</div>
+      <div class="week-focus">${meta.focus}</div>
+      <div class="week-macros">${macros}</div>
+    </div>
+    <div class="days-wrap">${days}</div>
+  </div>`;
+}
+
+function render() {
+  // athlete bar
+  const alias = (S.alias || 'Operator').replace(/[<>&"]/g, '');
+  $('athlete-bar').innerHTML = [
+    ['Athlete', alias],
+    ['Bodyweight', fmt(S.bw)],
+    ['Squat 1RM', fmt(S.squat)],
+    ['Deadlift 1RM', fmt(S.dead)],
+    ['Bench 1RM', fmt(S.bench)],
+    ['Press 1RM', fmt(S.ohp)],
+    ['Pull-Up 5RM', S.pull>0 ? 'BW+'+fmt(S.pull) : 'Bodyweight'],
+    ['Start', dateStr(S.start)]
+  ].map(p=>`<div class="astat"><div class="k">${p[0]}</div><div class="v">${p[1]}</div></div>`).join('');
+  // phase dates
+  const f = w => dateStr(weekDates(w)[0]);
+  const l = w => dateStr(weekDates(w)[6]);
+  $('ph-a-dates').textContent = `Phase A · Weeks 1–4 · ${f(0)} – ${l(3)}`;
+  $('ph-b-dates').textContent = `Phase B · Weeks 5–8 · ${f(4)} – ${l(7)}`;
+  $('ph-c-dates').textContent = `Phase C · Weeks 9–12 · ${f(8)} – ${l(11)}`;
+  // nav
+  let nav = '<span class="phase-sep">A</span>';
+  for (let w=0; w<12; w++) {
+    if (w===4) nav += '<span class="phase-sep">B</span>';
+    if (w===8) nav += '<span class="phase-sep">C</span>';
+    nav += `<button class="wbtn${w===0?' active':''}${(w===3||w===7)?' deload':''}" onclick="showWeek(${w+1})">W${String(w+1).padStart(2,'0')}</button>`;
+  }
+  $('week-nav').innerHTML = nav;
+  // weeks
+  let html = '';
+  for (let w=0; w<12; w++) html += buildWeek(w);
+  $('weeks-container').innerHTML = html;
+  $('calib').style.display = 'none';
+  $('program').style.display = 'block';
+  window.scrollTo({top: 0});
+}
+
 function showWeek(n) {
   document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.wbtn').forEach(b => b.classList.remove('active'));
-  const panel = document.getElementById('week-' + n);
-  if (panel) {
-    panel.classList.add('active');
-    panel.scrollIntoView({behavior: 'smooth', block: 'start'});
-  }
-  document.querySelectorAll('.wbtn')[n-1].classList.add('active');
+  const panel = $('week-' + n);
+  if (panel) panel.classList.add('active');
+  const btns = document.querySelectorAll('.wbtn');
+  if (btns[n-1]) btns[n-1].classList.add('active');
+  const nav = $('week-nav');
+  window.scrollTo({top: nav.offsetTop - 10, behavior: 'smooth'});
 }
+
+/* ── settings / link ── */
+function nextMonday(d) {
+  const day = d.getDay();
+  const add = day===1 ? 0 : (8 - day) % 7;
+  const out = new Date(d); out.setDate(d.getDate() + add); out.setHours(0,0,0,0);
+  return out;
+}
+function forge() {
+  const num = id => parseFloat($(id).value);
+  const units = $('f-units').value;
+  let bw = num('f-bw'), squat = num('f-squat'), dead = num('f-dead'), bench = num('f-bench'), ohp = num('f-ohp'), pull = num('f-pull');
+  if (!(bw>0) || !(squat>0) || !(dead>0) || !(bench>0) || !(ohp>0) || isNaN(pull)) { $('calib-error').style.display='block'; return; }
+  $('calib-error').style.display='none';
+  const toKg = v => units==='lb' ? v/2.20462 : v;
+  const startInput = $('f-start').value ? new Date($('f-start').value + 'T00:00:00') : new Date();
+  S = {
+    alias: $('f-alias').value.trim(),
+    units,
+    bw: toKg(bw), squat: toKg(squat), dead: toKg(dead), bench: toKg(bench), ohp: toKg(ohp), pull: Math.max(0, toKg(pull)),
+    start: nextMonday(startInput)
+  };
+  // encode into hash for a bookmarkable personal link
+  const enc = { a:S.alias, u:S.units, b:+S.bw.toFixed(1), s:+S.squat.toFixed(1), d:+S.dead.toFixed(1), e:+S.bench.toFixed(1), o:+S.ohp.toFixed(1), p:+S.pull.toFixed(1), t:S.start.toISOString().slice(0,10) };
+  try { location.hash = btoa(JSON.stringify(enc)); } catch(e) {}
+  render();
+}
+function recalibrate() {
+  $('program').style.display = 'none';
+  $('calib').style.display = 'block';
+  window.scrollTo({top: 0});
+}
+function copyLink(btn) {
+  const url = location.href;
+  const done = () => { btn.textContent = '✓ Link copied'; setTimeout(()=>btn.textContent='⧉ Copy my personal link', 2000); };
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(done).catch(()=>prompt('Copy your personal link:', url));
+  else prompt('Copy your personal link:', url);
+}
+function loadFromHash() {
+  if (!location.hash || location.hash.length < 8) return;
+  try {
+    const o = JSON.parse(atob(location.hash.slice(1)));
+    S = { alias:o.a||'', units:o.u||'kg', bw:o.b, squat:o.s, dead:o.d, bench:o.e, ohp:o.o, pull:o.p||0, start: nextMonday(new Date(o.t + 'T00:00:00')) };
+    if (S.bw>0 && S.squat>0) render();
+  } catch(e) { /* invalid hash — show calibration */ }
+}
+loadFromHash();
 </script>
 </body>
 </html>
