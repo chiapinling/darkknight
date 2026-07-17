@@ -429,6 +429,67 @@ body {
 .coach-final p { font-size: 14px; color: var(--white-dim); line-height: 1.9; max-width: 820px; margin-bottom: 14px; }
 .coach-final p strong { color: var(--white); font-weight: 500; }
 
+/* ════════════ READABILITY PATCH (Rev 2.1) ════════════
+   Brighter text, larger base sizes, no dim italics, full mobile layer. */
+:root {
+  --white: #f4f3f9;
+  --white-dim: #c8c5d6;    /* body text — was #9996aa */
+  --white-muted: #9c99b2;  /* labels/dates — was #4a4860, nearly invisible */
+}
+body { font-size: 15px; }
+.day-card.rest-card { opacity: 0.92; }
+.day-name.rest { color: var(--white-dim); }
+.day-date { font-size: 12px; }
+.hstat-label { color: var(--white-muted); font-size: 11px; }
+.quote-text { color: var(--white-dim); }
+.bc-body, .phase-blk p { font-size: 14px; line-height: 1.75; }
+.t-row { font-size: 14px; }
+.t-row .val { font-size: 13px; }
+.macro-chip { font-size: 13px; }
+.macro-chip span { color: var(--white-dim); }
+.kickoff-list li { font-size: 14px; }
+.week-focus { font-size: 15px; font-style: normal; }
+.day-desc { font-size: 14.5px; font-style: normal; color: var(--white-dim); }
+.ex-table { font-size: 14px; }
+.ex-table th { font-size: 11px; color: var(--white-muted); }
+.ex-table td { padding: 10px 10px; }
+.ex-name { color: var(--white); }
+.ex-note { font-size: 12.5px; font-style: normal; color: var(--white-muted); line-height: 1.5; }
+.ex-sets, .ex-load { font-size: 13px; }
+.ex-rest { font-size: 12.5px; color: var(--white-dim); }
+.circuit-item { font-size: 14px; line-height: 1.6; }
+.rest-item h4 { font-size: 11px; }
+.rest-item p { font-size: 14px; }
+.nutr-label { font-size: 11px; }
+.nutr-sub { font-size: 12px; color: var(--white-dim); }
+.coach-final p { font-size: 14.5px; }
+
+/* ── Mobile ── */
+@media (max-width: 700px) {
+  body { font-size: 15px; -webkit-text-size-adjust: 100%; }
+  .hero-content { grid-template-columns: 1fr; gap: 24px; padding: 40px 18px 32px; align-items: start; }
+  .hero-stats { width: 100%; }
+  .quote-banner { padding: 24px 18px; }
+  .section { padding: 28px 18px; }
+  .batman-grid, .phases-row, .targets-grid, .rest-grid-inner { grid-template-columns: 1fr; }
+  .kickoff-banner { padding: 24px 18px; }
+  .week-nav { padding: 10px 12px; gap: 5px; }
+  .wbtn { padding: 10px 12px; font-size: 12px; }  /* bigger tap targets */
+  .week-hdr { padding: 26px 18px 20px; }
+  .week-focus { font-size: 14.5px; line-height: 1.7; }
+  .days-wrap { padding: 18px 12px; gap: 12px; }
+  .day-hdr { flex-wrap: wrap; gap: 8px; padding: 12px 14px; }
+  .day-name-wrap { min-width: 0; }
+  .day-body { padding: 14px 12px; }
+  .ex-table { font-size: 13px; }
+  .ex-table td { padding: 9px 6px; }
+  .ex-table th { padding-left: 6px; padding-right: 6px; }
+  .ex-sets, .ex-load, .ex-rest { white-space: normal; }  /* let load notes wrap instead of overflowing */
+  .circuit-block { padding: 12px 12px; }
+  .nutr-section, .coach-final { padding: 28px 18px; }
+  .nutr-grid { grid-template-columns: 1fr 1fr; }
+}
+
 /* ── KICKOFF DAY ── */
 .kickoff-banner {
   margin: 24px 48px;
